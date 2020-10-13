@@ -25,7 +25,7 @@ namespace AbcPeople.BLL.Services
         {
             try
             {
-                log.LogDebug("Getting all employees");
+                log.LogDebug($"Getting all {typeof(TDal)}");
                 var list = context.Set<TDal>().ToList();
                 return mapper.Map<IEnumerable<T>>(list);
             }
@@ -39,7 +39,7 @@ namespace AbcPeople.BLL.Services
         {
             try
             {
-                log.LogDebug($"Getting employee {id}");
+                log.LogDebug($"Getting {typeof(TDal)} {id}");
                 var obj = context.Set<TDal>().Where(x => x.Id == id).FirstOrDefault();
                 return mapper.Map<T>(obj);
             }
@@ -53,7 +53,7 @@ namespace AbcPeople.BLL.Services
         {
             try
             {
-                log.LogDebug($"Deleting employee {id}");
+                log.LogDebug($"Deleting {typeof(TDal)} {id}");
                 var entityToRemove = context.Set<TDal>().Where(x => x.Id == id).FirstOrDefault();
                 context.Set<TDal>().Remove(entityToRemove);
             }
@@ -68,7 +68,7 @@ namespace AbcPeople.BLL.Services
             try
             {
                 log.LogDebug($"Creating new BDO object");
-                //T newObj = new T();
+                
                 return null;
             }
             catch (Exception)

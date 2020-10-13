@@ -8,7 +8,7 @@ namespace ABCPeople.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IEmployeeService employeeServcie;
+        private readonly IEmployeeService employeeService;
         private readonly IWorkExperienceService workExperienceService;
         private readonly IAddressService addressService;
         private readonly ILogger<HomeController> _logger;
@@ -16,19 +16,19 @@ namespace ABCPeople.Web.Controllers
         public HomeController(ILogger<HomeController> logger, IEmployeeService employeeService, IWorkExperienceService workExperienceService, IAddressService addressService)
         {
             _logger = logger;
-            this.employeeServcie = employeeService;
+            this.employeeService = employeeService;
             this.workExperienceService = workExperienceService;
             this.addressService = addressService;
         }
 
         public IActionResult Index()
         {
-            var employees = this.employeeServcie.GetAll();
+            var employees = this.employeeService.GetAll();
             var workExperiences = this.workExperienceService.GetAll();
-            var employeeTest = this.employeeServcie.Get(2);
-            this.employeeServcie.Delete(3); // wordt wel verwijderd van de context maar geen SaveChenges() !!! -> niet van db!
+            var employeeTest = this.employeeService.Get(2);
+            this.employeeService.Delete(3); // wordt wel verwijderd van de context maar geen SaveChenges() !!! -> niet van db!
 
-            var address = this.addressService.GetAll();
+            var addresses = this.addressService.GetAll();
 
             return View(employees);
         }

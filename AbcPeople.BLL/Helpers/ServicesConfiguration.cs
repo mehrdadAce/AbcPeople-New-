@@ -13,7 +13,7 @@ namespace AbcPeople.BLL.Helpers
         {
             services.AddDbContext<AbcPeopleEntities>(
                 options => options.UseSqlServer(configuration.GetConnectionString("AbcPeople"))
-                ); /// dan geen referentie in ui laag , hier zonder
+                ); 
 
             services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddScoped<IWorkExperienceService, WorkExperienceService>();
