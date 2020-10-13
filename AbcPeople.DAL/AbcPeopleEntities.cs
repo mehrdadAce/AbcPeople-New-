@@ -1,9 +1,6 @@
 ﻿using AbcPeople.DAL.Entities;
 using AbcPeople.DAL.EntityConfigurations;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace AbcPeople.DAL
 {

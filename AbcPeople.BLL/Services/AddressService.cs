@@ -2,12 +2,7 @@
 using AbcPeople.BLL.Services.Interfaces;
 using AbcPeople.DAL;
 using AutoMapper;
-using log4net;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace AbcPeople.BLL.Services
 {
