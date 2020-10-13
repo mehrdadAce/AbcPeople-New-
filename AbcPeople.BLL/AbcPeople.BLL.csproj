@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.0.0" />
+    <PackageReference Include="log4net" Version="2.0.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AbcPeople.BDO\AbcPeople.BDO.csproj" />
+    <ProjectReference Include="..\AbcPeople.DAL\AbcPeople.DAL.csproj" />
+  </ItemGroup>
+
+</Project>
