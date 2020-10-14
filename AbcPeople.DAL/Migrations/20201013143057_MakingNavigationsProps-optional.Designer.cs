@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AbcPeople.DAL.Migrations
 {
     [DbContext(typeof(AbcPeopleEntities))]
-    [Migration("20201013064441_Add-AddressEntity")]
-    partial class AddAddressEntity
+    [Migration("20201013143057_MakingNavigationsProps-optional")]
+    partial class MakingNavigationsPropsoptional
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,10 +28,12 @@ namespace AbcPeople.DAL.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CityId")
+                    b.Property<int?>("CityId")
+                        .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<int>("CountryId")
+                    b.Property<int?>("CountryId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
@@ -81,14 +83,11 @@ namespace AbcPeople.DAL.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
-                    b.Property<int?>("PlaceOfWorkAddressId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("HomeAddressId");
-
-                    b.HasIndex("PlaceOfWorkAddressId");
+                    b.HasIndex("HomeAddressId")
+                        .IsUnique()
+                        .HasFilter("[HomeAddressId] IS NOT NULL");
 
                     b.ToTable("Employees");
                 });
@@ -110,7 +109,7 @@ namespace AbcPeople.DAL.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("EmployeeId")
+                    b.Property<int?>("EmployeeId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("EndDate")
@@ -129,21 +128,15 @@ namespace AbcPeople.DAL.Migrations
             modelBuilder.Entity("AbcPeople.DAL.Entities.Employee", b =>
                 {
                     b.HasOne("AbcPeople.DAL.Entities.Address", "HomeAddress")
-                        .WithMany()
-                        .HasForeignKey("HomeAddressId");
-
-                    b.HasOne("AbcPeople.DAL.Entities.Address", "PlaceOfWorkAddress")
-                        .WithMany()
-                        .HasForeignKey("PlaceOfWorkAddressId");
+                        .WithOne("Employee")
+                        .HasForeignKey("AbcPeople.DAL.Entities.Employee", "HomeAddressId");
                 });
 
             modelBuilder.Entity("AbcPeople.DAL.Entities.WorkExperience", b =>
                 {
                     b.HasOne("AbcPeople.DAL.Entities.Employee", "Employee")
                         .WithMany("WorkExperiences")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EmployeeId");
                 });
 #pragma warning restore 612, 618
         }

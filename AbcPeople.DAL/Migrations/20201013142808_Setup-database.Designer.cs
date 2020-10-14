@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AbcPeople.DAL.Migrations
 {
     [DbContext(typeof(AbcPeopleEntities))]
-    [Migration("20201012091754_SetupDb")]
-    partial class SetupDb
+    [Migration("20201013142808_Setup-database")]
+    partial class Setupdatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,42 @@ namespace AbcPeople.DAL.Migrations
                 .HasAnnotation("ProductVersion", "3.1.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("AbcPeople.DAL.Entities.Address", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CountryId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("HouseNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Postcode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StreetName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Addresses");
+                });
 
             modelBuilder.Entity("AbcPeople.DAL.Entities.Employee", b =>
                 {
@@ -38,11 +74,18 @@ namespace AbcPeople.DAL.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
+                    b.Property<int?>("HomeAddressId")
+                        .HasColumnType("int");
+
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("HomeAddressId")
+                        .IsUnique()
+                        .HasFilter("[HomeAddressId] IS NOT NULL");
 
                     b.ToTable("Employees");
                 });
@@ -78,6 +121,13 @@ namespace AbcPeople.DAL.Migrations
                     b.HasIndex("EmployeeId");
 
                     b.ToTable("WorkExperiences");
+                });
+
+            modelBuilder.Entity("AbcPeople.DAL.Entities.Employee", b =>
+                {
+                    b.HasOne("AbcPeople.DAL.Entities.Address", "HomeAddress")
+                        .WithOne("Employee")
+                        .HasForeignKey("AbcPeople.DAL.Entities.Employee", "HomeAddressId");
                 });
 
             modelBuilder.Entity("AbcPeople.DAL.Entities.WorkExperience", b =>

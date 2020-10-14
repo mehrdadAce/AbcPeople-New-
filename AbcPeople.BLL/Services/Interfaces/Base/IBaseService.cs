@@ -9,7 +9,7 @@ namespace AbcPeople.BLL.Services.Interfaces
         IEnumerable<T> GetAll();
         T Get(int id);
         void Delete(int id);
-        T Create();
+        void Create(T obj);
         void Update(T obj);
     }
 }

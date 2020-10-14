@@ -14,7 +14,8 @@ namespace AbcPeople.DAL.EntityConfigurations
             builder.Property(p => p.LastName).HasMaxLength(100);
 
             builder.HasMany(p => p.WorkExperiences).WithOne(p => p.Employee);
-            //builder.HasOne(p => p.HomeAddress).WithOne(p => p.Employee);
+
+            builder.HasOne(p => p.HomeAddress).WithOne(p => p.Employee);
             //builder.HasOne(p => p.PlaceOfWorkAddress).WithOne(p => p.Employee);
         }
     }

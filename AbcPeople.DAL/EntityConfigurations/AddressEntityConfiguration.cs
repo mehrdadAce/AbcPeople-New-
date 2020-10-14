@@ -15,6 +15,8 @@ namespace AbcPeople.DAL.EntityConfigurations
             builder.Property(p => p.Postcode).IsRequired();
             builder.Property(p => p.CityId).IsRequired();
             builder.Property(p => p.CountryId).IsRequired();
+
+            builder.HasOne(p => p.Employee).WithOne(p => p.HomeAddress).HasForeignKey<Employee>(x => x.HomeAddressId);
         }
     }
 }

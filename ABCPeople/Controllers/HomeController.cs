@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ABCPeople.Web.Models;
 using AbcPeople.BLL.Services.Interfaces;
+using System;
 
 namespace ABCPeople.Web.Controllers
 {
@@ -13,7 +14,10 @@ namespace ABCPeople.Web.Controllers
         private readonly IAddressService addressService;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, IEmployeeService employeeService, IWorkExperienceService workExperienceService, IAddressService addressService)
+        public HomeController(ILogger<HomeController> logger, 
+                              IEmployeeService employeeService, 
+                              IWorkExperienceService workExperienceService, 
+                              IAddressService addressService)
         {
             _logger = logger;
             this.employeeService = employeeService;
@@ -23,14 +27,24 @@ namespace ABCPeople.Web.Controllers
 
         public IActionResult Index()
         {
-            var employees = this.employeeService.GetAll();
+            // var employees = this.employeeService.GetAll();
+
+            /*
             var workExperiences = this.workExperienceService.GetAll();
             var employeeTest = this.employeeService.Get(2);
-            this.employeeService.Delete(3); // wordt wel verwijderd van de context maar geen SaveChenges() !!! -> niet van db!
+            this.employeeService.Delete(3);
+            
+            var employee = new AbcPeople.BDO.Entities.Employee() { FirstName = "Mehrdad", LastName = "Kazemi", CreatedOn = DateTime.Now };
+            employeeService.Create(employee);
+            */
 
-            var addresses = this.addressService.GetAll();
+            //var addresses = this.addressService.GetAll();
+            //var address1 = this.addressService.Get(1);
 
-            return View(employees);
+            var employeeUpdate = new AbcPeople.BDO.Entities.Employee() { Id = 5, FirstName = "MehrdadUpd", LastName = "KazemiUpd", CreatedOn = DateTime.Now };
+            employeeService.Update(employeeUpdate);
+
+            return View();
         }
 
         public IActionResult Privacy()

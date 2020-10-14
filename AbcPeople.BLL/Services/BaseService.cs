@@ -31,6 +31,7 @@ namespace AbcPeople.BLL.Services
             }
             catch (Exception ex)
             {
+                log.LogDebug(ex.Message);
                 return null;
             }
         }
@@ -45,6 +46,7 @@ namespace AbcPeople.BLL.Services
             }
             catch (Exception ex)
             {
+                log.LogDebug(ex.Message);
                 return null;
             }
         }
@@ -55,25 +57,32 @@ namespace AbcPeople.BLL.Services
             {
                 log.LogDebug($"Deleting {typeof(TDal)} {id}");
                 var entityToRemove = context.Set<TDal>().Where(x => x.Id == id).FirstOrDefault();
+                if (entityToRemove == null)
+                {
+                    return;
+                }
                 context.Set<TDal>().Remove(entityToRemove);
+                context.SaveChanges();
             }
             catch (Exception ex)
             {
+                log.LogDebug(ex.Message);
                 throw;
             }
         }
 
-        public T Create()
+        public void Create(T obj)
         {
             try
             {
                 log.LogDebug($"Creating new BDO object");
-                
-                return null;
+                var newObj = context.Add(mapper.Map<TDal>(obj));
+                context.SaveChanges();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return null;
+                log.LogDebug(ex.Message);
+                throw;
             }
         }
 
@@ -82,11 +91,18 @@ namespace AbcPeople.BLL.Services
             try
             {
                 log.LogDebug($"Updating BDO object");
-                var entity = context.Set<TDal>().First(x => x.Id == obj.Id);
-                entity = mapper.Map<TDal>(obj);
+                //var foundEntity = context.Set<TDal>().Where(x => x.Id == obj.Id).FirstOrDefault();
+                //if(foundEntity != null)
+                //{
+                    
+                //}
+
+                context.Update(mapper.Map<TDal>(obj));
+                context.SaveChanges();
             }
             catch (Exception ex)
             {
+                log.LogDebug(ex.Message);
                 throw;
             }
         }
