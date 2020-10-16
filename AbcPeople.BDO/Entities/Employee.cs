@@ -1,4 +1,5 @@
 ﻿using AbcPeople.BDO.Entities.Base;
+using System.Collections.Generic;
 
 namespace AbcPeople.BDO.Entities
 {
@@ -6,7 +7,8 @@ namespace AbcPeople.BDO.Entities
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public int? HomeAddressId { get; set; }
+        public List<WorkExperience> WorkExperiences { get; set; }
+        public Address HomeAddress { get; set; }
 
     }
 }

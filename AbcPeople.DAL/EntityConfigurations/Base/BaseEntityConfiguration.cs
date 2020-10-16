@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AbcPeople.DAL.EntityConfigurations.Base
 {
-    public abstract class BaseEntityConfiguration<T> : IEntityTypeConfiguration<T> where T : BaseEntity  // -> abstracte klassen kan je niet instantieren
+    public abstract class BaseEntityConfiguration<T> : IEntityTypeConfiguration<T> where T : BaseEntity
     {
         public virtual void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<T> builder)
         {

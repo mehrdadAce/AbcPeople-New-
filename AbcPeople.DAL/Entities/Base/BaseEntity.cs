@@ -10,6 +10,7 @@ namespace AbcPeople.DAL.Entities.Base
 
         public BaseEntity()
         {
+            //todo test of deze overschreven wordt
             CreatedOn = DateTime.Now;
         }
         public void Delete()

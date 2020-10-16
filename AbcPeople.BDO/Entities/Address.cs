@@ -6,9 +6,9 @@ namespace AbcPeople.BDO.Entities
     {
         public string StreetName { get; set; }
         public string HouseNumber { get; set; }
-        public string Postcode { get; set; }
-        public int? CityId { get; set; }
-        public int? CountryId { get; set; }
+        public string Postalcode { get; set; }
+        public string City { get; set; }
+        public string Country { get; set; }
         //public int EmployeeId { get; set; }
     }
 }

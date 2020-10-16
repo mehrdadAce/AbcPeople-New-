@@ -25,13 +25,13 @@ namespace AbcPeople.BLL.Services
         {
             try
             {
-                log.LogDebug($"Getting all {typeof(TDal)}");
+                log.LogError($"Getting all {typeof(TDal)}");
                 var list = context.Set<TDal>().ToList();
                 return mapper.Map<IEnumerable<T>>(list);
             }
             catch (Exception ex)
             {
-                log.LogDebug(ex.Message);
+                log.LogError(ex.Message);
                 return null;
             }
         }
@@ -41,69 +41,68 @@ namespace AbcPeople.BLL.Services
             try
             {
                 log.LogDebug($"Getting {typeof(TDal)} {id}");
-                var obj = context.Set<TDal>().Where(x => x.Id == id).FirstOrDefault();
+                var obj = context.Set<TDal>().FirstOrDefault(x => x.Id == id);
                 return mapper.Map<T>(obj);
             }
             catch (Exception ex)
             {
-                log.LogDebug(ex.Message);
+                log.LogError(ex.Message);
                 return null;
             }
         }
 
-        public void Delete(int id)
+        public bool Delete(int id)
         {
             try
             {
                 log.LogDebug($"Deleting {typeof(TDal)} {id}");
-                var entityToRemove = context.Set<TDal>().Where(x => x.Id == id).FirstOrDefault();
+                
+                var entityToRemove = context.Set<TDal>().FirstOrDefault(x => x.Id == id);
                 if (entityToRemove == null)
-                {
-                    return;
-                }
-                context.Set<TDal>().Remove(entityToRemove);
+                    return false;
+
+                entityToRemove.Delete();
                 context.SaveChanges();
+                return true;
             }
             catch (Exception ex)
             {
-                log.LogDebug(ex.Message);
-                throw;
+                log.LogError(ex, $"Error while deleting {typeof(TDal)} (id={id})");
+                return false;
             }
         }
 
-        public void Create(T obj)
+        public bool Create(T obj)
         {
             try
             {
                 log.LogDebug($"Creating new BDO object");
-                var newObj = context.Add(mapper.Map<TDal>(obj));
+                obj.CreatedOn = DateTime.Now;
+                context.Add(mapper.Map<TDal>(obj));
                 context.SaveChanges();
+                return true;
             }
             catch (Exception ex)
             {
-                log.LogDebug(ex.Message);
-                throw;
+                log.LogError(ex, "Error while creating new object");
+                return false;
             }
         }
 
-        public void Update(T obj)
+        public bool Update(T obj)
         {
             try
             {
                 log.LogDebug($"Updating BDO object");
-                //var foundEntity = context.Set<TDal>().Where(x => x.Id == obj.Id).FirstOrDefault();
-                //if(foundEntity != null)
-                //{
-                    
-                //}
 
                 context.Update(mapper.Map<TDal>(obj));
                 context.SaveChanges();
+                return true;
             }
             catch (Exception ex)
             {
-                log.LogDebug(ex.Message);
-                throw;
+                log.LogError(ex, $"Error while updating {typeof(TDal)} (id={obj.Id})");
+                return false;
             }
         }
     }

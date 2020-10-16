@@ -8,8 +8,8 @@ namespace AbcPeople.BLL.Services.Interfaces
     {
         IEnumerable<T> GetAll();
         T Get(int id);
-        void Delete(int id);
-        void Create(T obj);
-        void Update(T obj);
+        bool Delete(int id);
+        bool Create(T obj);
+        bool Update(T obj);
     }
 }

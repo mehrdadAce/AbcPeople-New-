@@ -12,11 +12,12 @@ namespace AbcPeople.DAL.EntityConfigurations
 
             builder.Property(p => p.StreetName).IsRequired();
             builder.Property(p => p.HouseNumber).IsRequired();
-            builder.Property(p => p.Postcode).IsRequired();
-            builder.Property(p => p.CityId).IsRequired();
-            builder.Property(p => p.CountryId).IsRequired();
+            builder.Property(p => p.Postalcode).IsRequired();
+            builder.Property(p => p.City).IsRequired();
+            builder.Property(p => p.Country).IsRequired();
 
-            builder.HasOne(p => p.Employee).WithOne(p => p.HomeAddress).HasForeignKey<Employee>(x => x.HomeAddressId);
+            //builder.HasOne(p => p.Employee).WithOne(p => p.HomeAddress).HasForeignKey<Employee>(x => x.HomeAddressId);
+            //builder.HasOne(p => p.City).WithOne(p => p.Address).HasForeignKey<City>(x => x.Id);
         }
     }
 }

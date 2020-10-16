@@ -18,6 +18,7 @@ namespace AbcPeople.BLL.Helpers
             services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddScoped<IWorkExperienceService, WorkExperienceService>();
             services.AddScoped<IAddressService, AddressService>();
+            services.AddScoped<ICityService, CityService>();
 
         }
     }

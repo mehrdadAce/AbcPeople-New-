@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AbcPeople.DAL.Migrations
 {
     [DbContext(typeof(AbcPeopleEntities))]
-    [Migration("20201013143057_MakingNavigationsProps-optional")]
-    partial class MakingNavigationsPropsoptional
+    [Migration("20201015101015_setupDb")]
+    partial class setupDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,13 +28,13 @@ namespace AbcPeople.DAL.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CityId")
+                    b.Property<string>("City")
                         .IsRequired()
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CountryId")
+                    b.Property<string>("Country")
                         .IsRequired()
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -46,7 +46,7 @@ namespace AbcPeople.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Postcode")
+                    b.Property<string>("Postalcode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -57,6 +57,32 @@ namespace AbcPeople.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Addresses");
+                });
+
+            modelBuilder.Entity("AbcPeople.DAL.Entities.City", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("AddressId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Name")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AddressId");
+
+                    b.ToTable("Cities");
                 });
 
             modelBuilder.Entity("AbcPeople.DAL.Entities.Employee", b =>
@@ -85,9 +111,7 @@ namespace AbcPeople.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("HomeAddressId")
-                        .IsUnique()
-                        .HasFilter("[HomeAddressId] IS NOT NULL");
+                    b.HasIndex("HomeAddressId");
 
                     b.ToTable("Employees");
                 });
@@ -125,11 +149,18 @@ namespace AbcPeople.DAL.Migrations
                     b.ToTable("WorkExperiences");
                 });
 
+            modelBuilder.Entity("AbcPeople.DAL.Entities.City", b =>
+                {
+                    b.HasOne("AbcPeople.DAL.Entities.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId");
+                });
+
             modelBuilder.Entity("AbcPeople.DAL.Entities.Employee", b =>
                 {
                     b.HasOne("AbcPeople.DAL.Entities.Address", "HomeAddress")
-                        .WithOne("Employee")
-                        .HasForeignKey("AbcPeople.DAL.Entities.Employee", "HomeAddressId");
+                        .WithMany()
+                        .HasForeignKey("HomeAddressId");
                 });
 
             modelBuilder.Entity("AbcPeople.DAL.Entities.WorkExperience", b =>
