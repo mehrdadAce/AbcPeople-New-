@@ -9,6 +9,7 @@ namespace AbcPeople.BDO.Entities
         public string LastName { get; set; }
         public List<WorkExperience> WorkExperiences { get; set; }
         public Address HomeAddress { get; set; }
+        public List<ProfileAdjustment> ProfileAdjustments { get; set; }
 
     }
 }

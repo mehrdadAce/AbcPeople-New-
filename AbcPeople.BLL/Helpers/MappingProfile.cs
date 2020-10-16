@@ -10,6 +10,8 @@ namespace AbcPeople.BLL.Helpers
             CreateMap<BDO.Entities.WorkExperience, DAL.Entities.WorkExperience>().ReverseMap();
             CreateMap<BDO.Entities.Address, DAL.Entities.Address>().ReverseMap();
             CreateMap<BDO.Entities.City, DAL.Entities.City>().ReverseMap();
+            CreateMap<BDO.Entities.ProfileAdjustment, DAL.Entities.ProfileAdjustment>().ReverseMap();
+
         }
     }
 }

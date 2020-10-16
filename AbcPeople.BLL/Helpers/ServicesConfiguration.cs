@@ -19,7 +19,7 @@ namespace AbcPeople.BLL.Helpers
             services.AddScoped<IWorkExperienceService, WorkExperienceService>();
             services.AddScoped<IAddressService, AddressService>();
             services.AddScoped<ICityService, CityService>();
-
+            services.AddScoped<IProfileAdjustmentService, ProfileAdjustmentService>();
         }
     }
 }

@@ -1,15 +1,17 @@
 ﻿
 using AbcPeople.BDO.Entities.Base;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AbcPeople.BLL.Services.Interfaces
 {
-    public interface IBaseService<T> where T : BaseEntity
+    public interface IBaseService<T, TDal> where T : BaseEntity where TDal : DAL.Entities.Base.BaseEntity
     {
-        IEnumerable<T> GetAll();
-        T Get(int id);
+        IEnumerable<T> GetAll(); 
+        T Get(int id, Func<IQueryable<TDal>, IQueryable<TDal>> dbSetFunc = null);
         bool Delete(int id);
         bool Create(T obj);
-        bool Update(T obj);
+        bool Update(T obj); //test maar is
     }
 }

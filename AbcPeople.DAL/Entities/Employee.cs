@@ -8,10 +8,9 @@ namespace AbcPeople.DAL.Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        public virtual ICollection<WorkExperience> WorkExperiences { get; set; } // -> om extra query te vermijden!
+        public virtual ICollection<WorkExperience> WorkExperiences { get; set; }
         public int? HomeAddressId { get; set; }
         public virtual Address HomeAddress { get; set; }
-        //public int PlaceOfWorkAddressId { get; set; }
-        //public virtual Address PlaceOfWorkAddress { get; set; }
+        public virtual ICollection<ProfileAdjustment> ProfileAdjustments { get; set; }
     }
 }

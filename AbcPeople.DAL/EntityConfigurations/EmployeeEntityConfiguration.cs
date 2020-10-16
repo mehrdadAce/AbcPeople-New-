@@ -17,6 +17,8 @@ namespace AbcPeople.DAL.EntityConfigurations
 
             builder.HasOne(p => p.HomeAddress);
 
+            builder.HasMany(p => p.ProfileAdjustments);
+
         }
     }
 }

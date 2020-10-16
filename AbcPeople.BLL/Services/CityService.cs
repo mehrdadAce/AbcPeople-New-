@@ -4,7 +4,6 @@ using AbcPeople.DAL;
 using AutoMapper;
 using Microsoft.Extensions.Logging;
 
-
 namespace AbcPeople.BLL.Services
 {
     public class CityService : BaseService<City, DAL.Entities.City>, ICityService

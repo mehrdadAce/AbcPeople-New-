@@ -2,7 +2,7 @@
 
 namespace AbcPeople.BLL.Services.Interfaces
 {
-    public interface IWorkExperienceService : IBaseService<WorkExperience>
+    public interface IWorkExperienceService : IBaseService<WorkExperience, DAL.Entities.WorkExperience>
     {
         
     }
