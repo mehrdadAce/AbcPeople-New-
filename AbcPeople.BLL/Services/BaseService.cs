@@ -7,14 +7,13 @@ using AutoMapper;
 using Microsoft.Extensions.Logging;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Policy;
 
 namespace AbcPeople.BLL.Services
 {
     public class BaseService<T, TDal> : IBaseService<T, TDal> where T : BaseEntity where TDal : DAL.Entities.Base.BaseEntity
     {
-        private readonly ILogger<BaseService<T, TDal>> log;
-        private readonly AbcPeopleEntities context;
+        protected readonly ILogger<BaseService<T, TDal>> log;
+        protected readonly AbcPeopleEntities context;
         protected readonly IMapper mapper;
         protected readonly DbSet<TDal> dbSet;
         public BaseService(ILogger<BaseService<T, TDal>> log, AbcPeopleEntities context, IMapper mapper)
@@ -25,26 +24,17 @@ namespace AbcPeople.BLL.Services
             this.dbSet = context.Set<TDal>();
         }
 
-        public IEnumerable<T> GetAll()
+        public IEnumerable<T> GetAll(Func<IQueryable<TDal>, IQueryable<TDal>> dbSetFunc = null)
         {
-            //try
-            //{
-            //    log.LogError($"Getting all {typeof(TDal)}");
-            //    var list = dbSet.ToList();
-            //    return mapper.Map<IEnumerable<T>>(list);
-            //}
-            //catch (Exception ex)
-            //{
-            //    log.LogError(ex.Message);
-            //    return null;
-            //}
-
-
             try
             {
                 log.LogError($"Getting all {typeof(TDal)}");
-                var list = dbSet.ToList();
-                return mapper.Map<IEnumerable<T>>(list);
+                var entities = dbSet as IQueryable<TDal>;
+
+                if (dbSetFunc != null)
+                    entities = dbSetFunc(dbSet);
+
+                return mapper.Map<IEnumerable<T>>(entities);
             }
             catch (Exception ex)
             {
@@ -61,9 +51,9 @@ namespace AbcPeople.BLL.Services
                 var entities = dbSet as IQueryable<TDal>; 
 
                 if (dbSetFunc != null)
-                    entities = dbSetFunc(dbSet); /// TDal is niet 
+                    entities = dbSetFunc(dbSet);
 
-                var obj = dbSet.FirstOrDefault(x => x.Id == id);
+                var obj = entities.FirstOrDefault(x => x.Id == id);
                 return mapper.Map<T>(obj);
             }
             catch (Exception ex)
@@ -111,21 +101,31 @@ namespace AbcPeople.BLL.Services
             }
         }
 
-        public bool Update(T obj)
+        public virtual bool Update(T entity, Func<IQueryable<TDal>, IQueryable<TDal>> dbSetFunc = null)
         {
             try
             {
                 log.LogDebug($"Updating BDO object");
+                var entities = dbSet as IQueryable<TDal>;
 
-                context.Update(mapper.Map<TDal>(obj));
+                if (dbSetFunc != null)
+                    entities = dbSetFunc(dbSet);
+
+                var dalEntity = entities.FirstOrDefault(x => x.Id == entity.Id);
+                UpdateProperties(entity, dalEntity);
                 context.SaveChanges();
                 return true;
             }
             catch (Exception ex)
             {
-                log.LogError(ex, $"Error while updating {typeof(TDal)} (id={obj.Id})");
+                log.LogError(ex, $"Error while updating {typeof(TDal)} (id={entity.Id})");
                 return false;
             }
+        }
+
+        protected virtual void UpdateProperties(T entity, TDal dalEntity)
+        {
+            mapper.Map(entity, dalEntity);
         }
     }
 }

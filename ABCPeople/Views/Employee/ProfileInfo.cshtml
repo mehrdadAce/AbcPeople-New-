@@ -1,0 +1,113 @@
+﻿@model AbcPeople.BDO.Entities.Employee;
+
+<ul class="nav nav-tabs ">
+    <li class="nav-item active">
+        <a class="nav-link active" href="/Employee/ProfileInfo">Info</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/Employee/ProfileWorkExperiences">Werkervaringen</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/Employee/ProfileCompetencies">Competenties</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/Employee/ProfileEducations">Opleidingen</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/Employee/ProfileCV">CV</a>
+    </li>
+</ul>
+
+<div class="d-block">
+    <a href="/Employee/EditProfileUser" class="btn btn-primary float-right mt-2">Bewerken</a>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-7">
+            <div class="card mt-2">
+                <div class="card-header">
+                    Persoonlijke gegevens
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-4">
+                            <img src="/images/unknown-male-person.jpg" alt="My Profile image" class="img-fluid" />
+                        </div>
+                        <div class="col-8">
+                            <h4>@Model.FirstName @Model.LastName</h4>
+
+                            <h6>ACE - Junior .NET Consultant ? </h6>
+                            <p>Coach <a href="#">Sander Van Looveren ? </a></p>
+                            <p><i class="fas fa-envelope"></i> <a href="#">@Model.Email</a></p>
+                            <p><i class="fas fa-phone-square-alt"></i> @Model.Telephone</p>
+                            <p><i class="fas fa-home"></i> Pieter Van Maldereplein 1b Bus 2, 2650 Edegem ? </p>
+                        </div>
+                    </div>
+
+                    <table class="table table-striped mt-3">
+                        <tbody>
+                            <tr>
+                                <th class="p-1 pl-1" scope="row">Werkadres</th>
+                                <td class="p-1 pl-1">Franseweg 31, 2929 Kalmthout ? </td>
+                            </tr>
+                            <tr>
+                                <th class="p-1 pl-1" scope="row">Email privé</th>
+                                <td class="p-1 pl-1">@Model.PrivateEmail</td>
+                            </tr>
+                            <tr>
+                                <th class="p-1 pl-1" scope="row">Geboortedatum</th>
+                                <td class="p-1 pl-1">@Model.DateOfBirth.ToString("dd/mm/yyyy")</td>
+                            </tr>
+                            <tr>
+                                <th class="p-1 pl-1" scope="row">Geslacht</th>
+                                <td class="p-1 pl-1">@((Model.Gender == 'M')?"Man":"Vrouw")</td>
+                            </tr>
+                            <tr>
+                                <th class="p-1 pl-1" scope="row">Moedertaal</th>
+                                <td class="p-1 pl-1">@Model.MotherLanguage</td>
+                            </tr>
+                            <tr>
+                                <th class="p-1 pl-1" scope="row">Nationaliteit</th>
+                                <td class="p-1 pl-1">@Model.Nationality</td>
+                            </tr>
+                            <tr>
+                                <th class="p-1 pl-1" scope="row">Gezinssituatie</th>
+                                <td class="p-1 pl-1">@Model.FamilySituation</td>
+                            </tr>
+                            <tr>
+                                <th class="p-1 pl-1" scope="row">Indiensttreding</th>
+                                <td class="p-1 pl-1">@Model.BeginDateOfWork</td>
+                            </tr>
+                            <tr>
+                                <th class="p-1 pl-1" scope="row">Laatst aangepast</th>
+                                <td class="p-1 pl-1">@Model.ProfileAdjustments.OrderByDescending(x => x.Timestamp).FirstOrDefault().Timestamp.ToString("dd/mm/yyyy")</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="card mt-2">
+                <div class="card-header">
+                    Korte voorstelling
+                </div>
+                <div class="card-body">
+                    Mehrdad is een sociaal en gemotiveerde ontwikkelaar. Hij houdt van nieuwe uitdagingen. Hij leert graag nieuwe web technologieën door regelmatig bij te scholen en online cursussen te volgen.
+                    Zijn plan binnen 5 jaar is om een expert te worden in web technologiën en een .Net senior ontwikkelaar. ??????
+                </div>
+            </div>
+            <div class="card mt-2">
+                <div class="card-header">
+                    Hobby's'
+                </div>
+                <div class="card-body">
+                    Voetbal
+                    Volleybal
+                    Schaken
+                    Fitness ?????
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
