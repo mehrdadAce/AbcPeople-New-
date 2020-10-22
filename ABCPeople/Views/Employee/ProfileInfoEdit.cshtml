@@ -1,4 +1,4 @@
-﻿@model  AbcPeople.BDO.Entities.Employee
+﻿@model  AbcPeople.ViewModels.ProfileInfoViewModel
 
 <h5>Bewerk profiel</h5>
 
@@ -10,43 +10,43 @@
 <div class="tab-content mt-3">
     <div class="tab-pane active" id="1a">
         <form asp-action="SaveEditProfileUser">
-            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Employee.Id" />
             <div class="form-group">
                 <div class="row">
                     <div class="row col-lg-9">
                         <label class="col-lg-3 text-right" for="naam">Voor- & achternaam</label>
                         @*<label asp-for="FirstName" class="control-label"></label>*@
-                        <input class="col-lg-4 form-control" asp-for="FirstName" />
-                        <input class="col-lg-4 form-control" asp-for="LastName" />
+                        <input class="col-lg-4 form-control" asp-for="Employee.FirstName" />
+                        <input class="col-lg-4 form-control" asp-for="Employee.LastName" />
 
-                        <label class="col-lg-3 text-right" asp-for="HomeAddress.StreetName">Thuisadres (straat)</label>
-                        <input class="col-lg-8 form-control" asp-for="HomeAddress.StreetName" />
+                        <label class="col-lg-3 text-right" asp-for="Employee.HomeAddress.StreetName">Thuisadres (straat)</label>
+                        <input class="col-lg-8 form-control" asp-for="Employee.HomeAddress.StreetName" />
 
-                        <label class="col-lg-3 text-right" asp-for="HomeAddress.HouseNumber">Thuisadres (nr.)</label>
-                        <input class="col-lg-8 form-control" asp-for="HomeAddress.HouseNumber" />
+                        <label class="col-lg-3 text-right" asp-for="Employee.HomeAddress.HouseNumber">Thuisadres (nr.)</label>
+                        <input class="col-lg-8 form-control" asp-for="Employee.HomeAddress.HouseNumber" />
 
                         <label class="col-lg-3 text-right"> </label>
-                        <input class="col-lg-2 form-control" asp-for="HomeAddress.Postalcode"/>
-                        <input class="col-lg-6 form-control" asp-for="HomeAddress.City"/>
+                        <input class="col-lg-2 form-control" asp-for="Employee.HomeAddress.Postalcode"/>
+                        <input class="col-lg-6 form-control" asp-for="Employee.HomeAddress.City"/>
 
-                        <label class="col-lg-3 text-right" asp-for="PrivateEmail">Email</label>
-                        <input class="col-lg-8 form-control" asp-for="PrivateEmail"/>
+                        <label class="col-lg-3 text-right" asp-for="Employee.PrivateEmail">Email</label>
+                        <input class="col-lg-8 form-control" asp-for="Employee.PrivateEmail"/>
 
                         <label class="col-lg-3 text-right" for="street">Telefoon</label>
-                        <input class="col-lg-8 form-control" asp-for="Telephone" />
+                        <input class="col-lg-8 form-control" asp-for="Employee.Telephone" />
 
                         <label class="col-lg-3 text-right" for="street">GSM ????</label>
                         <input class="col-lg-8 form-control" type="text" name="thuisadres" value="mehrdad.kazemi@ac-e.be" placeholder="bv. 0456/78.90.12" />
 
-                        <label class="col-lg-3 text-right" asp-for="PlaceOfWorkAddress.StreetName">Werkadres</label>
-                        <input class="col-lg-8 form-control" asp-for="PlaceOfWorkAddress.StreetName" placeholder="straat + nr." />
+                        <label class="col-lg-3 text-right" asp-for="Employee.PlaceOfWorkAddress.StreetName">Werkadres</label>
+                        <input class="col-lg-8 form-control" asp-for="Employee.PlaceOfWorkAddress.StreetName" placeholder="straat + nr." />
 
                         <label class="col-lg-3 text-right"> </label>
-                        <input class="col-lg-2 form-control" asp-for="PlaceOfWorkAddress.Postalcode" placeholder="postcode" />
-                        <input class="col-lg-6 form-control" asp-for="PlaceOfWorkAddress.City" placeholder="stad" />
+                        <input class="col-lg-2 form-control" asp-for="Employee.PlaceOfWorkAddress.Postalcode" placeholder="postcode" />
+                        <input class="col-lg-6 form-control" asp-for="Employee.PlaceOfWorkAddress.City" placeholder="stad" />
 
-                        <label class="col-lg-3 text-right" asp-for="Email">Email(werk)</label>
-                        <input class="col-lg-8 form-control" asp-for="Email" />
+                        <label class="col-lg-3 text-right" asp-for="Employee.Email">Email(werk)</label>
+                        <input class="col-lg-8 form-control" asp-for="Employee.Email" />
 
                     </div>
 
@@ -91,13 +91,13 @@
 
                     </select>*@
 
-                        <label class="col-lg-5 text-right my-1" for="motherlanguage">Moedertaal</label>
-                        <select class="col-lg-7 form-control my-1">
-                            <option value="P">Portugees</option>
+                        <label class="col-lg-5 text-right my-1" asp-for="Employee.MotherLanguage">Moedertaal</label>
+                        <select class="col-lg-7 form-control my-1" asp-for="Employee.MotherLanguage" >
+                            @*<option value="P">Portugees</option>
                             <option value="NL">Nederlands</option>
                             <option value="FR">Frans</option>
                             <option value="EN">Engels</option>
-                            <option value="D">Duits</option>
+                            <option value="D">Duits</option>*@
                         </select>
 
                         <label class="col-lg-5 text-right my-1" for="motherlanguage">Nationaliteit</label>
@@ -113,8 +113,8 @@
 
                     </div>
                     <div class="row col-lg-6">
-                        <label class="col-lg-5 text-right" asp-for="BeginDateOfWork">Indiensttreding</label>
-                        <input class="col-lg-7 form-control my-1" type="date" asp-for="BeginDateOfWork" />
+                        <label class="col-lg-5 text-right" asp-for="Employee.BeginDateOfWork">Indiensttreding</label>
+                        <input class="col-lg-7 form-control my-1" type="date" asp-for="Employee.BeginDateOfWork" />
 
                         <label class="col-lg-5 text-right" for="company">Bedrijf</label>
                         <select class="col-lg-7 form-control my-1">

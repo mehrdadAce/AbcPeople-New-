@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AbcPeople.DAL.EntityConfigurations
 {
-    public class CityEntityConfiguration : BaseEntityConfiguration<City>
+    public class FamilySituationEntityConfiguration : BaseEntityConfiguration<FamilySituation>
     {
-        public override void Configure(EntityTypeBuilder<City> builder)
+        public override void Configure(EntityTypeBuilder<FamilySituation> builder)
         {
             base.Configure(builder);
 

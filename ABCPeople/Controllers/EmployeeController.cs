@@ -1,8 +1,11 @@
 ﻿using AbcPeople.BDO.Entities;
 using AbcPeople.BLL.Services;
 using AbcPeople.BLL.Services.Interfaces;
+using AbcPeople.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace AbcPeople.Controllers
 {
@@ -10,11 +13,15 @@ namespace AbcPeople.Controllers
     {
         private readonly IEmployeeService employeeService;
         private readonly IProfileAdjustmentService profileAdjustmentService;
+        private readonly ILanguageService languageService;
 
-        public EmployeeController(IEmployeeService employeeService, IProfileAdjustmentService profileAdjustmentService)
+        public EmployeeController(IEmployeeService employeeService, 
+            IProfileAdjustmentService profileAdjustmentService,
+            ILanguageService languageService)
         {
             this.employeeService = employeeService;
             this.profileAdjustmentService = profileAdjustmentService;
+            this.languageService = languageService;
         }
 
         //public IActionResult Index()
@@ -36,16 +43,33 @@ namespace AbcPeople.Controllers
 
         public IActionResult ProfileInfoEdit() // ProfileInfoEdit - EditProfileUser
         {
-            Employee currentUser = this.employeeService.Get(4, x => x.Include(y => y.HomeAddress));   // ?????????????????
-            return View("ProfileInfoEdit", currentUser);
+            //Employee currentUser = this.employeeService.Get(4, x => x.Include(y => y.HomeAddress));
+
+            var test = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "1", Text = "engels" },
+                new SelectListItem { Value = "2", Text = "Nederlands" },
+                new SelectListItem { Value = "3", Text = "Duits"  },
+            };
+
+            ProfileInfoViewModel profileInfoViewModel = new ProfileInfoViewModel()
+            {
+                Employee = this.employeeService.Get(4, x => x.Include(y => y.HomeAddress)),
+                Languages = test
+            };
+            return View("ProfileInfoEdit", profileInfoViewModel);
         }
 
         [HttpPost]
-        public IActionResult SaveEditProfileUser(int id, [Bind("Id, FirstName, LastName, HomeAddress, Email, Telephone, PlaceOfWorkAddress, PrivateEmail, DateOfBirth, Gender, FamilySituation, MotherLanguage, Nationality, BeginDateOfWork, ShortDescriptionNL, ShortDescriptionEN, Hobbys")] Employee employee)
+        public IActionResult SaveEditProfileUser(int id, [Bind("Employee")] ProfileInfoViewModel profileInfoViewModel)
         {
             //this.employeeService.Update(employee);
-            this.employeeService.Update(employee);
-            return View("ProfileInfo", employee);
+            this.employeeService.Update(profileInfoViewModel.Employee);
+            return View("ProfileInfo", profileInfoViewModel.Employee);
+        }
+        public IActionResult ProfileWorkExperiences()
+        {
+            return View();
         }
 
         public IActionResult GoToWhoIsWho()
@@ -89,11 +113,7 @@ namespace AbcPeople.Controllers
             return View();
         }
 
-        public IActionResult ProfileWorkExperiences()
-        {
-            return View();
-        }
-
+       
         public IActionResult ProfileCompetencies()
         {
             return View();

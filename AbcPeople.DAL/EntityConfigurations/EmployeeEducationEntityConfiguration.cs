@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AbcPeople.DAL.EntityConfigurations
 {
-    public class CityEntityConfiguration : BaseEntityConfiguration<City>
+    public class EmployeeEducationEntityConfiguration : BaseEntityConfiguration<EmployeeEducation>
     {
-        public override void Configure(EntityTypeBuilder<City> builder)
+        public override void Configure(EntityTypeBuilder<EmployeeEducation> builder)
         {
             base.Configure(builder);
 
-            builder.Property(p => p.Name).IsRequired();
         }
     }
+
 }

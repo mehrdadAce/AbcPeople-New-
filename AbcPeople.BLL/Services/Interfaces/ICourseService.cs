@@ -2,8 +2,7 @@
 
 namespace AbcPeople.BLL.Services.Interfaces
 {
-    public interface ILanguageService : IBaseService<Language, DAL.Entities.Language>
+    public interface ICourseService : IBaseService<Course, DAL.Entities.Course>
     {
-
     }
 }

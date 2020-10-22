@@ -20,6 +20,15 @@ namespace AbcPeople.BLL.Helpers
             services.AddScoped<IAddressService, AddressService>();
             services.AddScoped<ICityService, CityService>();
             services.AddScoped<IProfileAdjustmentService, ProfileAdjustmentService>();
+            services.AddScoped<ILanguageService, LanguageService>();
+            services.AddScoped<IEmployeeCompetencyService, EmployeeCompetencyService>();
+            services.AddScoped<IFamilySituationService, FamilySituationService>();
+            services.AddScoped<IEmployeeExamService, EmployeeExamService>();
+            services.AddScoped<IEmployeeEducationService, EmployeeEducationService>();
+            services.AddScoped<INationalityService, NationalityService>();
+            services.AddScoped<ICourseService, CourseService>();
+            services.AddScoped<ILanguageSkillService, LanguageSkillService>();
+
         }
     }
 }

@@ -11,6 +11,14 @@ namespace AbcPeople.DAL
         public DbSet<Address> Addresses { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<ProfileAdjustment> ProfileAdjustments { get; set; }
+        public DbSet<Language> Languages { get; set; }
+        public DbSet<EmployeeCompetency> EmployeeCompetencies { get; set; }
+        public DbSet<FamilySituation> FamilySituations { get; set; }
+        public DbSet<EmployeeExam> EmployeeExams { get; set; }
+        public DbSet<EmployeeEducation> EmployeeEducations { get; set; }
+        public DbSet<Nationality> Nationalities { get; set; }
+        public DbSet<Course> Cources { get; set; }
+        public DbSet<LanguageSkill> LanguageSkills { get; set; }
 
         public AbcPeopleEntities(DbContextOptions options) : base(options)
         {
@@ -24,6 +32,14 @@ namespace AbcPeople.DAL
             modelBuilder.ApplyConfiguration(new AddressEntityConfiguration());
             modelBuilder.ApplyConfiguration(new CityEntityConfiguration());
             modelBuilder.ApplyConfiguration(new ProfileAdjustmentEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new LanguageEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new EmployeeCompetencyEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new FamilySituationEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new EmployeeExamEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new EmployeeEducationEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new NationalityEntityConfiguration()); 
+            modelBuilder.ApplyConfiguration(new CourseEntityConfiguration()); 
+            modelBuilder.ApplyConfiguration(new LanguageSkillEntityConfiguration()); 
         }
     }
 }

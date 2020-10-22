@@ -3,11 +3,6 @@ using AbcPeople.BLL.Services.Interfaces;
 using AbcPeople.DAL;
 using AutoMapper;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
 
 namespace AbcPeople.BLL.Services
 {
