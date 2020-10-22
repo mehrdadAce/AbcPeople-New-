@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using AbcPeople.BDO.Entities;
+﻿using AbcPeople.BDO.Entities;
+using AbcPeople.BLL.Services;
 using AbcPeople.BLL.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace AbcPeople.Controllers
 {
@@ -35,20 +30,22 @@ namespace AbcPeople.Controllers
 
         public IActionResult ProfileInfo()
         {
-            var currentEmployee = this.employeeService.Get(1, x => x.Include(y => y.ProfileAdjustments));
+            var currentEmployee = this.employeeService.Get(4, x => x.Include(y => y.ProfileAdjustments));
             return View(currentEmployee);
         }
 
-        public IActionResult EditProfileUser() // ProfileInfoEdit
+        public IActionResult ProfileInfoEdit() // ProfileInfoEdit - EditProfileUser
         {
-            Employee currentUser = this.employeeService.Get(1);   // ?????????????????
-            return View(currentUser);
+            Employee currentUser = this.employeeService.Get(4, x => x.Include(y => y.HomeAddress));   // ?????????????????
+            return View("ProfileInfoEdit", currentUser);
         }
 
-        public IActionResult SaveEditProfileUser()
+        [HttpPost]
+        public IActionResult SaveEditProfileUser(int id, [Bind("Id, FirstName, LastName, HomeAddress, Email, Telephone, PlaceOfWorkAddress, PrivateEmail, DateOfBirth, Gender, FamilySituation, MotherLanguage, Nationality, BeginDateOfWork, ShortDescriptionNL, ShortDescriptionEN, Hobbys")] Employee employee)
         {
-            var currentEmployee = this.employeeService.Get(1);  // ?????????????????????
-            return View("ProfileInfo", currentEmployee);
+            //this.employeeService.Update(employee);
+            this.employeeService.Update(employee);
+            return View("ProfileInfo", employee);
         }
 
         public IActionResult GoToWhoIsWho()
@@ -105,6 +102,25 @@ namespace AbcPeople.Controllers
         public IActionResult ProfileCV()
         {
             return View();
+        }
+        public IActionResult ShowWhoIsWhoName()
+        {
+            return View("WhoIsWhoName");
+        }
+
+        public IActionResult ShowWhoIsWhoFunctionAndDomain()
+        {
+            return View("WhoIsWhoFunctionAndDomain");
+        }
+
+        public IActionResult ShowWhoIsWhoCertificate()
+        {
+            return View("WhoIsWhoCertificate");
+        }
+
+        public IActionResult ShowWhoIsWhoCompany()
+        {
+            return View("WhoIsWhoCompany");
         }
     }
 }

@@ -19,7 +19,7 @@
 </ul>
 
 <div class="d-block">
-    <a href="/Employee/EditProfileUser" class="btn btn-primary float-right mt-2">Bewerken</a>
+    <a href="/Employee/ProfileInfoEdit" class="btn btn-primary float-right mt-2">Bewerken</a>
 </div>
 <div class="container">
     <div class="row">
@@ -40,7 +40,7 @@
                             <p>Coach <a href="#">Sander Van Looveren ? </a></p>
                             <p><i class="fas fa-envelope"></i> <a href="#">@Model.Email</a></p>
                             <p><i class="fas fa-phone-square-alt"></i> @Model.Telephone</p>
-                            <p><i class="fas fa-home"></i> Pieter Van Maldereplein 1b Bus 2, 2650 Edegem ? </p>
+                            <p><i class="fas fa-home"></i> @Model.HomeAddress.StreetName @Model.HomeAddress.HouseNumber, @Model.HomeAddress.Postalcode @Model.HomeAddress.City </p>
                         </div>
                     </div>
 
@@ -93,8 +93,24 @@
                     Korte voorstelling
                 </div>
                 <div class="card-body">
-                    Mehrdad is een sociaal en gemotiveerde ontwikkelaar. Hij houdt van nieuwe uitdagingen. Hij leert graag nieuwe web technologieën door regelmatig bij te scholen en online cursussen te volgen.
-                    Zijn plan binnen 5 jaar is om een expert te worden in web technologiën en een .Net senior ontwikkelaar. ??????
+                    <div class="container">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item active">
+                                <a class="nav-link active" href="#menu1" data-toggle="tab">NL</a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#menu2" data-toggle="tab">EN</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="menu1" class="tab-pane active">
+                                <p>@Model.ShortDescriptionNL</p>
+                            </div>
+                            <div id="menu2" class="tab-pane">
+                                <p>@Model.ShortDescriptionEN</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="card mt-2">
@@ -102,10 +118,7 @@
                     Hobby's'
                 </div>
                 <div class="card-body">
-                    Voetbal
-                    Volleybal
-                    Schaken
-                    Fitness ?????
+                    @Model.Hobbys
                 </div>
             </div>
         </div>

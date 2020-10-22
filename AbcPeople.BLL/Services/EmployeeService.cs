@@ -48,7 +48,10 @@ namespace AbcPeople.BLL.Services
             //public Address PlaceOfWorkAddress { get; set; }
             dalEntity.Nationality = entity.Nationality ?? dalEntity.Nationality;
             dalEntity.FamilySituation = entity.FamilySituation ?? dalEntity.FamilySituation;
-            dalEntity.MotherLanguage = entity.MotherLanguage ?? dalEntity.MotherLanguage;
+            dalEntity.MotherLanguage = entity.MotherLanguage != null ? mapper.Map<DAL.Entities.Language>(entity.MotherLanguage) : dalEntity.MotherLanguage;
+            dalEntity.ShortDescriptionNL = entity.ShortDescriptionNL ?? dalEntity.ShortDescriptionNL;
+            dalEntity.ShortDescriptionEN = entity.ShortDescriptionEN ?? dalEntity.ShortDescriptionEN;
+            dalEntity.Hobbys = entity.Hobbys ?? dalEntity.Hobbys;
 
             context.ProfileAdjustments.Add(new DAL.Entities.ProfileAdjustment()
             {
@@ -56,5 +59,7 @@ namespace AbcPeople.BLL.Services
                 Timestamp = DateTime.Now
             });
         }
+
+        //public Employee FindEmployeeInContext
     }
 }

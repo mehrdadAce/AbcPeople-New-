@@ -4,14 +4,16 @@ using AbcPeople.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AbcPeople.DAL.Migrations
 {
     [DbContext(typeof(AbcPeopleEntities))]
-    partial class AbcPeopleEntitiesModelSnapshot : ModelSnapshot
+    [Migration("20201020111901_AddShortDescriptionNlENAndHobbysToEmployeeEntity")]
+    partial class AddShortDescriptionNlENAndHobbysToEmployeeEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -132,14 +134,11 @@ namespace AbcPeople.DAL.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
-                    b.Property<int?>("MotherLanguageId")
-                        .HasColumnType("int");
+                    b.Property<string>("MotherLanguage")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nationality")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("PlaceOfWorkAddressId")
-                        .HasColumnType("int");
 
                     b.Property<string>("PrivateEmail")
                         .HasColumnType("nvarchar(max)");
@@ -157,35 +156,7 @@ namespace AbcPeople.DAL.Migrations
 
                     b.HasIndex("HomeAddressId");
 
-                    b.HasIndex("MotherLanguageId");
-
-                    b.HasIndex("PlaceOfWorkAddressId");
-
                     b.ToTable("Employees");
-                });
-
-            modelBuilder.Entity("AbcPeople.DAL.Entities.Language", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Acronym")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Language");
                 });
 
             modelBuilder.Entity("AbcPeople.DAL.Entities.ProfileAdjustment", b =>
@@ -259,14 +230,6 @@ namespace AbcPeople.DAL.Migrations
                     b.HasOne("AbcPeople.DAL.Entities.Address", "HomeAddress")
                         .WithMany()
                         .HasForeignKey("HomeAddressId");
-
-                    b.HasOne("AbcPeople.DAL.Entities.Language", "MotherLanguage")
-                        .WithMany()
-                        .HasForeignKey("MotherLanguageId");
-
-                    b.HasOne("AbcPeople.DAL.Entities.Address", "PlaceOfWorkAddress")
-                        .WithMany()
-                        .HasForeignKey("PlaceOfWorkAddressId");
                 });
 
             modelBuilder.Entity("AbcPeople.DAL.Entities.ProfileAdjustment", b =>

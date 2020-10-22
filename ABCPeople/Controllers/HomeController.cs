@@ -36,18 +36,9 @@ namespace ABCPeople.Web.Controllers
             //var employee = new AbcPeople.BDO.Entities.Employee()
             //{
             //    Id = 1,
-            //    FirstName = "Mehrdad",
-            //    LastName = "Kazemi",
-            //    BeginDateOfWork = new DateTime(2020, 09, 28),
-            //    DateOfBirth = new DateTime(1985, 10, 11),
-            //    Email = "Mehrdad.Kazemi@ac-e.be",
-            //    EmployeeTitle = "ACE - Junior .NET Consultant",
-            //    FamilySituation = "Aleenstaand",
-            //    Gender = 'M',
-            //    MotherLanguage = "Persian",
-            //    Nationality = "Belg",
-            //    PrivateEmail = "M3hrdad.Kazemy@gmail.com",
-            //    Telephone = "0487/303512"
+            //    ShortDescriptionEN = "Mehrdad is a real team player and motivated developer who takes responsibility. He likes to be a full - stack developer and to learn more about the web technologies.",
+            //    ShortDescriptionNL = "Mehrdad is een gemotiveerd en teamgerichte ontwikkelaar met verantwoordelijkheidsgevoel. Hij zou graag willen evolueren naar een full stack developer.",
+            //    Hobbys = "Voetbal Fitness Volleybal Schaken Snooker"
             //};
             //employeeService.Update(employee);
 

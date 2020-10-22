@@ -19,10 +19,14 @@ namespace AbcPeople.BDO.Entities
         //public Address PlaceOfWorkAddress { get; set; }
         public string Nationality { get; set; }
         public string FamilySituation { get; set; }
-        public string MotherLanguage { get; set; }
+        public string ShortDescriptionNL { get; set; }
+        public string ShortDescriptionEN { get; set; }
+        public string Hobbys { get; set; }
 
+        public Language MotherLanguage { get; set; }
         public List<WorkExperience> WorkExperiences { get; set; }
         public Address HomeAddress { get; set; }
+        public Address PlaceOfWorkAddress { get; set; }
         public List<ProfileAdjustment> ProfileAdjustments { get; set; }
     }
 }

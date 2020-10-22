@@ -16,8 +16,11 @@ namespace AbcPeople.DAL.EntityConfigurations
             builder.HasMany(p => p.WorkExperiences);
 
             builder.HasOne(p => p.HomeAddress);
+            builder.HasOne(p => p.PlaceOfWorkAddress);
 
             builder.HasMany(p => p.ProfileAdjustments);
+
+            builder.HasOne(p => p.MotherLanguage);
 
         }
     }
