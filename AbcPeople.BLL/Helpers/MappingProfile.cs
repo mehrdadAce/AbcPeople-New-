@@ -19,6 +19,8 @@ namespace AbcPeople.BLL.Helpers
             CreateMap<BDO.Entities.Nationality, DAL.Entities.Nationality>().ReverseMap(); 
             CreateMap<BDO.Entities.Course, DAL.Entities.Course>().ReverseMap(); 
             CreateMap<BDO.Entities.LanguageSkill, DAL.Entities.LanguageSkill>().ReverseMap(); 
+            CreateMap<BDO.Entities.Competency, DAL.Entities.Competency>().ReverseMap(); 
+            CreateMap<BDO.Entities.KnowledgeLevel, DAL.Entities.KnowledgeLevel>().ReverseMap(); 
         }
     }
 }

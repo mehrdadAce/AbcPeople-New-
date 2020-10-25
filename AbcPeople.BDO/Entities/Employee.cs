@@ -17,12 +17,13 @@ namespace AbcPeople.BDO.Entities
         public string EmployeeTitle { get; set; }
         public string Coach { get; set; }
         //public Address PlaceOfWorkAddress { get; set; }
-        public string Nationality { get; set; }
-        public string FamilySituation { get; set; }
+        public Nationality Nationality { get; set; }
         public string ShortDescriptionNL { get; set; }
         public string ShortDescriptionEN { get; set; }
         public string Hobbys { get; set; }
 
+        public FamilySituation FamilySituation { get; set; }
+        public IEnumerable<EmployeeCompetency> EmployeeCompetency { get; set; }
         public Language MotherLanguage { get; set; }
         public List<WorkExperience> WorkExperiences { get; set; }
         public Address HomeAddress { get; set; }

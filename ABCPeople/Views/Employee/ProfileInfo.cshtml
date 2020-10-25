@@ -64,11 +64,11 @@
                             </tr>
                             <tr>
                                 <th class="p-1 pl-1" scope="row">Moedertaal</th>
-                                <td class="p-1 pl-1">@Model.MotherLanguage</td>
+                                <td class="p-1 pl-1">@(Model.MotherLanguage != null ? Model.MotherLanguage.Name : "")</td>
                             </tr>
                             <tr>
                                 <th class="p-1 pl-1" scope="row">Nationaliteit</th>
-                                <td class="p-1 pl-1">@Model.Nationality</td>
+                                @*<td class="p-1 pl-1">@Model.Nationality</td>*@
                             </tr>
                             <tr>
                                 <th class="p-1 pl-1" scope="row">Gezinssituatie</th>

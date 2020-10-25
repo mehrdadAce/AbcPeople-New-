@@ -7,8 +7,12 @@ namespace AbcPeople.DAL.Entities
 {
     public class EmployeeCompetency : BaseEntity
     {
-        public int CompetencyId { get; set; }
         public int EmployeeId { get; set; }
+        public Employee Employee { get; set; }
+
+        public int CompetencyId { get; set; }
+        public IEnumerable<Competency> Competency { get; set; }
         public int KnowledgeLevelId { get; set; }
+        public KnowledgeLevel Level { get; set; }
     }
 }

@@ -5,6 +5,7 @@ using AbcPeople.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 
 namespace AbcPeople.Controllers
@@ -14,14 +15,17 @@ namespace AbcPeople.Controllers
         private readonly IEmployeeService employeeService;
         private readonly IProfileAdjustmentService profileAdjustmentService;
         private readonly ILanguageService languageService;
+        private readonly INationalityService nationalityService;
 
         public EmployeeController(IEmployeeService employeeService, 
-            IProfileAdjustmentService profileAdjustmentService,
-            ILanguageService languageService)
+                                  IProfileAdjustmentService profileAdjustmentService,
+                                  ILanguageService languageService,
+                                  INationalityService nationalityService)
         {
             this.employeeService = employeeService;
             this.profileAdjustmentService = profileAdjustmentService;
             this.languageService = languageService;
+            this.nationalityService = nationalityService;
         }
 
         //public IActionResult Index()
@@ -37,7 +41,7 @@ namespace AbcPeople.Controllers
 
         public IActionResult ProfileInfo()
         {
-            var currentEmployee = this.employeeService.Get(4, x => x.Include(y => y.ProfileAdjustments));
+            var currentEmployee = this.employeeService.Get(4, x => x.Include(y => y.ProfileAdjustments).Include(y => y.MotherLanguage));
             return View(currentEmployee);
         }
 
@@ -45,25 +49,35 @@ namespace AbcPeople.Controllers
         {
             //Employee currentUser = this.employeeService.Get(4, x => x.Include(y => y.HomeAddress));
 
-            var test = new List<SelectListItem>
+            IEnumerable<Language> languages = this.languageService.GetAll();
+            var languageSelectListItem = new List<SelectListItem>();
+            foreach (Language language in languages)
             {
-                new SelectListItem { Value = "1", Text = "engels" },
-                new SelectListItem { Value = "2", Text = "Nederlands" },
-                new SelectListItem { Value = "3", Text = "Duits"  },
-            };
+                languageSelectListItem.Add(new SelectListItem { Value = language.Id.ToString(), Text = language.Name });
+            }
+
+            var nationalities = this.nationalityService.GetAll();
+            var nationalitySelectListItem = new List<SelectListItem>();
+            foreach (Nationality nationality in nationalities)
+            {
+                nationalitySelectListItem.Add(new SelectListItem { Value = nationality.Id.ToString(), Text = nationality.Name });
+            }
 
             ProfileInfoViewModel profileInfoViewModel = new ProfileInfoViewModel()
             {
                 Employee = this.employeeService.Get(4, x => x.Include(y => y.HomeAddress)),
-                Languages = test
+                Languages = languageSelectListItem,
+                Nationalities = nationalitySelectListItem
             };
             return View("ProfileInfoEdit", profileInfoViewModel);
         }
 
         [HttpPost]
-        public IActionResult SaveEditProfileUser(int id, [Bind("Employee")] ProfileInfoViewModel profileInfoViewModel)
+        public IActionResult SaveEditProfileUser(int id, [Bind("Employee, LanguageId, NationalityId")] ProfileInfoViewModel profileInfoViewModel)
         {
             //this.employeeService.Update(employee);
+            profileInfoViewModel.Employee.MotherLanguage = this.languageService.Get(Int32.Parse(profileInfoViewModel.LanguageId));
+            profileInfoViewModel.Employee.Nationality = this.nationalityService.Get(Int32.Parse(profileInfoViewModel.NationalityId));
             this.employeeService.Update(profileInfoViewModel.Employee);
             return View("ProfileInfo", profileInfoViewModel.Employee);
         }

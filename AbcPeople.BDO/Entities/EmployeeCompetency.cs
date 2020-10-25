@@ -1,11 +1,12 @@
 ﻿using AbcPeople.BDO.Entities.Base;
+using System.Collections.Generic;
 
 namespace AbcPeople.BDO.Entities
 {
     public class EmployeeCompetency : BaseEntity
     {
-        public int CompetencyId { get; set; }
-        public int EmployeeId { get; set; }
-        public int KnowledgeLevelId { get; set; }
+        public IEnumerable<Competency> Competency { get; set; }
+        public Employee Employee { get; set; }
+        public KnowledgeLevel KnowledgeLevel { get; set; }
     }
 }

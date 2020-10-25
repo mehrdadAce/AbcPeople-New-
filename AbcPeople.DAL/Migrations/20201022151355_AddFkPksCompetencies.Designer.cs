@@ -4,14 +4,16 @@ using AbcPeople.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AbcPeople.DAL.Migrations
 {
     [DbContext(typeof(AbcPeopleEntities))]
-    partial class AbcPeopleEntitiesModelSnapshot : ModelSnapshot
+    [Migration("20201022151355_AddFkPksCompetencies")]
+    partial class AddFkPksCompetencies
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,6 +33,7 @@ namespace AbcPeople.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Country")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedOn")
@@ -193,8 +196,8 @@ namespace AbcPeople.DAL.Migrations
                     b.Property<int?>("MotherLanguageId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("NationalityId")
-                        .HasColumnType("int");
+                    b.Property<string>("Nationality")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("PlaceOfWorkAddressId")
                         .HasColumnType("int");
@@ -218,8 +221,6 @@ namespace AbcPeople.DAL.Migrations
                     b.HasIndex("HomeAddressId");
 
                     b.HasIndex("MotherLanguageId");
-
-                    b.HasIndex("NationalityId");
 
                     b.HasIndex("PlaceOfWorkAddressId");
 
@@ -524,10 +525,6 @@ namespace AbcPeople.DAL.Migrations
                     b.HasOne("AbcPeople.DAL.Entities.Language", "MotherLanguage")
                         .WithMany()
                         .HasForeignKey("MotherLanguageId");
-
-                    b.HasOne("AbcPeople.DAL.Entities.Nationality", "Nationality")
-                        .WithMany()
-                        .HasForeignKey("NationalityId");
 
                     b.HasOne("AbcPeople.DAL.Entities.Address", "PlaceOfWorkAddress")
                         .WithMany()

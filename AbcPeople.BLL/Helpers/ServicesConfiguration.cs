@@ -28,6 +28,8 @@ namespace AbcPeople.BLL.Helpers
             services.AddScoped<INationalityService, NationalityService>();
             services.AddScoped<ICourseService, CourseService>();
             services.AddScoped<ILanguageSkillService, LanguageSkillService>();
+            services.AddScoped<ICompetencyService, CompetencyService>();
+            services.AddScoped<IKnowledgeLevelService, KnowledgeLevelService>();
 
         }
     }

@@ -22,6 +22,12 @@ namespace AbcPeople.DAL.EntityConfigurations
 
             builder.HasOne(p => p.MotherLanguage);
 
+            builder.HasMany(p => p.EmployeeCompetencies);
+            builder.HasMany(p => p.LanguageSkills);
+
+            builder.HasOne(p => p.FamilySituation);
+            builder.HasOne(p => p.Nationality);
+
         }
     }
 }

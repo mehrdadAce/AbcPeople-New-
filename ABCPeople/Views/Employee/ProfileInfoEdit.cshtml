@@ -92,7 +92,7 @@
                     </select>*@
 
                         <label class="col-lg-5 text-right my-1" asp-for="Employee.MotherLanguage">Moedertaal</label>
-                        <select class="col-lg-7 form-control my-1" asp-for="Employee.MotherLanguage" >
+                        <select class="col-lg-7 form-control my-1" asp-for="@Model.LanguageId" asp-items="@Model.Languages">
                             @*<option value="P">Portugees</option>
                             <option value="NL">Nederlands</option>
                             <option value="FR">Frans</option>
@@ -101,11 +101,7 @@
                         </select>
 
                         <label class="col-lg-5 text-right my-1" for="motherlanguage">Nationaliteit</label>
-                        <select class="col-lg-7 form-control my-1">
-                            <option value="B">België</option>
-                            <option value="NL">Nederland</option>
-                            <option value="D">Duitsland</option>
-                        </select>
+                        <select class="col-lg-7 form-control my-1" asp-for="@Model.NationalityId" asp-items="@Model.Nationalities"></select>
 
                         <label class="col-lg-5 text-right my-1" for="drivinglicence">Rijbewijs ????</label>
                         <textarea id="w3review" name="w3review" rows="4" cols="50" class="col-lg-7 form-control my-1">At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.
@@ -289,16 +285,16 @@
                 </div>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                @*<input type="submit" value="Save" class="btn btn-primary" />*@
 
-                @*<div class="row mt-3">
+                <div class="row mt-3">
                     <div class="col-md">
                         <div class="d-flex justify-content-end">
-                            <input type="submit" name="name" value="Opslaan" class="btn btn-primary text-right mr-2" formaction="/Employee/SaveEditProfileUser" />
-                            <input type="submit" name="name" value="Annuleren" class="btn btn-secondary float-right" formaction="/Employee/ProfileInfo" />
+                            <input type="submit" value="Opslaan" class="btn btn-primary text-right mr-2" />
+                            @*<input type="submit" value="Annuleren" class="btn btn-secondary float-right" />*@
                         </div>
                     </div>
-                </div>*@
+                </div>
             </div>
         </form>
     </div>

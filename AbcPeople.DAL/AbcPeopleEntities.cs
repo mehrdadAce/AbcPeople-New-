@@ -19,6 +19,8 @@ namespace AbcPeople.DAL
         public DbSet<Nationality> Nationalities { get; set; }
         public DbSet<Course> Cources { get; set; }
         public DbSet<LanguageSkill> LanguageSkills { get; set; }
+        public DbSet<Competency> Competencies { get; set; }
+        public DbSet<KnowledgeLevel> KnowledgeLevels { get; set; }
 
         public AbcPeopleEntities(DbContextOptions options) : base(options)
         {
@@ -40,6 +42,8 @@ namespace AbcPeople.DAL
             modelBuilder.ApplyConfiguration(new NationalityEntityConfiguration()); 
             modelBuilder.ApplyConfiguration(new CourseEntityConfiguration()); 
             modelBuilder.ApplyConfiguration(new LanguageSkillEntityConfiguration()); 
+            modelBuilder.ApplyConfiguration(new CompetencyEntityConfiguration()); 
+            modelBuilder.ApplyConfiguration(new KnowledgeLevelEntityConfiguration()); 
         }
     }
 }

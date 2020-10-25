@@ -13,6 +13,8 @@ namespace AbcPeople.DAL.EntityConfigurations
             builder.Property(p => p.EmployeeId).IsRequired();
             builder.Property(p => p.KnowledgeLevelId).IsRequired();
             builder.Property(p => p.CompetencyId).IsRequired();
+
+            builder.HasMany(p => p.Competency);
         }
     }
 }

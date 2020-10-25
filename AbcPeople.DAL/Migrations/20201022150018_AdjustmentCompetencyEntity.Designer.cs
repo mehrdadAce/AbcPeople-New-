@@ -4,14 +4,16 @@ using AbcPeople.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AbcPeople.DAL.Migrations
 {
     [DbContext(typeof(AbcPeopleEntities))]
-    partial class AbcPeopleEntitiesModelSnapshot : ModelSnapshot
+    [Migration("20201022150018_AdjustmentCompetencyEntity")]
+    partial class AdjustmentCompetencyEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,6 +33,7 @@ namespace AbcPeople.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Country")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedOn")
@@ -193,8 +196,8 @@ namespace AbcPeople.DAL.Migrations
                     b.Property<int?>("MotherLanguageId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("NationalityId")
-                        .HasColumnType("int");
+                    b.Property<string>("Nationality")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("PlaceOfWorkAddressId")
                         .HasColumnType("int");
@@ -218,8 +221,6 @@ namespace AbcPeople.DAL.Migrations
                     b.HasIndex("HomeAddressId");
 
                     b.HasIndex("MotherLanguageId");
-
-                    b.HasIndex("NationalityId");
 
                     b.HasIndex("PlaceOfWorkAddressId");
 
@@ -251,8 +252,6 @@ namespace AbcPeople.DAL.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("EmployeeId");
-
-                    b.HasIndex("KnowledgeLevelId");
 
                     b.ToTable("EmployeeCompetencies");
                 });
@@ -325,28 +324,6 @@ namespace AbcPeople.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("FamilySituations");
-                });
-
-            modelBuilder.Entity("AbcPeople.DAL.Entities.KnowledgeLevel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Level")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("KnowledgeLevels");
                 });
 
             modelBuilder.Entity("AbcPeople.DAL.Entities.Language", b =>
@@ -525,10 +502,6 @@ namespace AbcPeople.DAL.Migrations
                         .WithMany()
                         .HasForeignKey("MotherLanguageId");
 
-                    b.HasOne("AbcPeople.DAL.Entities.Nationality", "Nationality")
-                        .WithMany()
-                        .HasForeignKey("NationalityId");
-
                     b.HasOne("AbcPeople.DAL.Entities.Address", "PlaceOfWorkAddress")
                         .WithMany()
                         .HasForeignKey("PlaceOfWorkAddressId");
@@ -536,15 +509,9 @@ namespace AbcPeople.DAL.Migrations
 
             modelBuilder.Entity("AbcPeople.DAL.Entities.EmployeeCompetency", b =>
                 {
-                    b.HasOne("AbcPeople.DAL.Entities.Employee", "Employee")
+                    b.HasOne("AbcPeople.DAL.Entities.Employee", null)
                         .WithMany("EmployeeCompetencies")
                         .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("AbcPeople.DAL.Entities.KnowledgeLevel", "Level")
-                        .WithMany()
-                        .HasForeignKey("KnowledgeLevelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

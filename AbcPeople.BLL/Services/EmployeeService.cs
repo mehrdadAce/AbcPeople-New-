@@ -46,9 +46,36 @@ namespace AbcPeople.BLL.Services
             dalEntity.EmployeeTitle = entity.EmployeeTitle ?? dalEntity.EmployeeTitle;
             dalEntity.Coach = entity.Coach ?? dalEntity.Coach;
             //public Address PlaceOfWorkAddress { get; set; }
-            dalEntity.Nationality = entity.Nationality ?? dalEntity.Nationality;
-            dalEntity.FamilySituation = entity.FamilySituation ?? dalEntity.FamilySituation;
-            dalEntity.MotherLanguage = entity.MotherLanguage != null ? mapper.Map<DAL.Entities.Language>(entity.MotherLanguage) : dalEntity.MotherLanguage;
+
+            if (entity.HomeAddress != null)
+            {
+                if (dalEntity.HomeAddress == null)
+                    dalEntity.HomeAddress = new DAL.Entities.Address();
+                dalEntity.HomeAddress.StreetName = entity.HomeAddress.StreetName;
+                dalEntity.HomeAddress.HouseNumber = entity.HomeAddress.HouseNumber;
+                dalEntity.HomeAddress.City = entity.HomeAddress.City;
+                dalEntity.HomeAddress.Postalcode = entity.HomeAddress.Postalcode;
+            }
+
+            //if (entity.Nationality != null)
+            //{
+            //    dalEntity.Nationality.Name = entity.Nationality.Name;
+            //}
+
+            if (entity.FamilySituation != null)
+            {
+                if (dalEntity.FamilySituation == null)
+                    dalEntity.FamilySituation = new DAL.Entities.FamilySituation();
+                dalEntity.FamilySituation.Name = entity.FamilySituation.Name;
+            }
+
+            if (entity.MotherLanguage != null)
+            {
+                if (dalEntity.MotherLanguage == null)
+                    dalEntity.MotherLanguage = new DAL.Entities.Language();
+                dalEntity.MotherLanguage.Name = entity.MotherLanguage.Name;
+                dalEntity.MotherLanguage.Acronym = entity.MotherLanguage.Acronym;
+            }
             dalEntity.ShortDescriptionNL = entity.ShortDescriptionNL ?? dalEntity.ShortDescriptionNL;
             dalEntity.ShortDescriptionEN = entity.ShortDescriptionEN ?? dalEntity.ShortDescriptionEN;
             dalEntity.Hobbys = entity.Hobbys ?? dalEntity.Hobbys;
