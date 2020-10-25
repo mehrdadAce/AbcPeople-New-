@@ -15,15 +15,12 @@
                 <div class="row">
                     <div class="row col-lg-9">
                         <label class="col-lg-3 text-right" for="naam">Voor- & achternaam</label>
-                        @*<label asp-for="FirstName" class="control-label"></label>*@
                         <input class="col-lg-4 form-control" asp-for="Employee.FirstName" />
                         <input class="col-lg-4 form-control" asp-for="Employee.LastName" />
 
-                        <label class="col-lg-3 text-right" asp-for="Employee.HomeAddress.StreetName">Thuisadres (straat)</label>
-                        <input class="col-lg-8 form-control" asp-for="Employee.HomeAddress.StreetName" />
-
-                        <label class="col-lg-3 text-right" asp-for="Employee.HomeAddress.HouseNumber">Thuisadres (nr.)</label>
-                        <input class="col-lg-8 form-control" asp-for="Employee.HomeAddress.HouseNumber" />
+                        <label class="col-lg-3 text-right" asp-for="Employee.HomeAddress.StreetName">Thuisadres (straat + nr.)</label>
+                        <input class="col-lg-6 form-control" asp-for="Employee.HomeAddress.StreetName" />
+                        <input class="col-lg-2 form-control" asp-for="Employee.HomeAddress.HouseNumber" />
 
                         <label class="col-lg-3 text-right"> </label>
                         <input class="col-lg-2 form-control" asp-for="Employee.HomeAddress.Postalcode"/>
@@ -32,14 +29,15 @@
                         <label class="col-lg-3 text-right" asp-for="Employee.PrivateEmail">Email</label>
                         <input class="col-lg-8 form-control" asp-for="Employee.PrivateEmail"/>
 
-                        <label class="col-lg-3 text-right" for="street">Telefoon</label>
+                        <label class="col-lg-3 text-right" asp-for="Employee.Telephone">Telefoon</label>
                         <input class="col-lg-8 form-control" asp-for="Employee.Telephone" />
 
-                        <label class="col-lg-3 text-right" for="street">GSM ????</label>
-                        <input class="col-lg-8 form-control" type="text" name="thuisadres" value="mehrdad.kazemi@ac-e.be" placeholder="bv. 0456/78.90.12" />
+                        <label class="col-lg-3 text-right" asp-for="Employee.Gsm">GSM</label>
+                        <input class="col-lg-8 form-control" asp-for="Employee.Gsm" placeholder="bv. 0456/78.90.12" />
 
-                        <label class="col-lg-3 text-right" asp-for="Employee.PlaceOfWorkAddress.StreetName">Werkadres</label>
-                        <input class="col-lg-8 form-control" asp-for="Employee.PlaceOfWorkAddress.StreetName" placeholder="straat + nr." />
+                        <label class="col-lg-3 text-right" asp-for="Employee.PlaceOfWorkAddress.StreetName">Werkadres (straat + nr.)</label>
+                        <input class="col-lg-6 form-control" asp-for="Employee.PlaceOfWorkAddress.StreetName" />
+                        <input class="col-lg-2 form-control" asp-for="Employee.PlaceOfWorkAddress.HouseNumber" />
 
                         <label class="col-lg-3 text-right"> </label>
                         <input class="col-lg-2 form-control" asp-for="Employee.PlaceOfWorkAddress.Postalcode" placeholder="postcode" />
@@ -47,9 +45,7 @@
 
                         <label class="col-lg-3 text-right" asp-for="Employee.Email">Email(werk)</label>
                         <input class="col-lg-8 form-control" asp-for="Employee.Email" />
-
                     </div>
-
                     <div class="col-lg-3">
                         <div class="card" style="width: 18rem;">
                             <div class="card-header">
@@ -70,38 +66,23 @@
                 <hr />
                 <div class="row">
                     <div class="row col-lg-6">
-                        <label class="col-lg-5 text-right" for="street">Geboortedatum</label>
-                        <input class="col-lg-7 form-control" type="date" name="thuisadres" value="09/09/1999" placeholder="geboortedatum" />
+                        <label class="col-lg-5 text-right" asp-for="Employee.DateOfBirth">Geboortedatum</label>
+                        <input class="col-lg-7 form-control" type="date" asp-for="Employee.DateOfBirth" placeholder="geboortedatum" />
 
                         <label class="col-lg-5 text-right my-1" for="gender">Geslacht</label>
-                        <select class="col-lg-7 form-control my-1">
+                        <select class="col-lg-7 form-control my-1" asp-for="Employee.Gender">
                             <option value="M">Man</option>
-                            <option value="V">Vrouw</option>
+                            <option value="F">Vrouw</option>
                         </select>
 
-                        <label class="col-lg-5 text-right my-1" for="family-situation">Gezinssituatie</label>
-                        <select class="col-lg-7 form-control my-1">
-                            <option value="A">Alleenstaand</option>
-                            <option value="S">Samenwonend</option>
-                            <option value="G">Gehuwd</option>
-                        </select>
-
-                        @*<label class="col-lg-5 text-right my-1" for="family-situation">Gezinssituatie2</label>
-                    <select class="col-lg-7 form-control my-1" asp-items="@Model.FamilySituation">
-
-                    </select>*@
+                        <label class="col-lg-5 text-right my-1" asp-for="Employee.FamilySituation">Gezinssituatie</label>
+                        <select class="col-lg-7 form-control my-1" asp-for="Employee.FamilySituationId" asp-items="@Model.FamilySituations"></select>
 
                         <label class="col-lg-5 text-right my-1" asp-for="Employee.MotherLanguage">Moedertaal</label>
-                        <select class="col-lg-7 form-control my-1" asp-for="@Model.LanguageId" asp-items="@Model.Languages">
-                            @*<option value="P">Portugees</option>
-                            <option value="NL">Nederlands</option>
-                            <option value="FR">Frans</option>
-                            <option value="EN">Engels</option>
-                            <option value="D">Duits</option>*@
-                        </select>
+                        <select class="col-lg-7 form-control my-1" asp-for="Employee.MotherLanguageId" asp-items="@Model.Languages"></select>
 
                         <label class="col-lg-5 text-right my-1" for="motherlanguage">Nationaliteit</label>
-                        <select class="col-lg-7 form-control my-1" asp-for="@Model.NationalityId" asp-items="@Model.Nationalities"></select>
+                        <select class="col-lg-7 form-control my-1" asp-for="Employee.NationalityId" asp-items="@Model.Nationalities"></select>
 
                         <label class="col-lg-5 text-right my-1" for="drivinglicence">Rijbewijs ????</label>
                         <textarea id="w3review" name="w3review" rows="4" cols="50" class="col-lg-7 form-control my-1">At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.
@@ -122,15 +103,7 @@
                         </select>
 
                         <label class="col-lg-5 text-right" for="company">Functie</label>
-                        <select class="col-lg-7 form-control my-1">
-                            <option value="1">Back office</option>
-                            <option value="2">Consultant</option>
-                            <option value="3">Management</option>
-                            <option value="4">Sales / HR</option>
-                            <option value="5">System Engineer</option>
-                            <option value="6">System Engineer Consultant</option>
-                            <option value="7">Unit Manager</option>
-                        </select>
+                        <select class="col-lg-7 form-control my-1" asp-for="Employee.RoleId" asp-items="@Model.Roles"></select>
 
                         <label class="col-lg-5 text-right" for="company">Domein</label>
                         <select class="col-lg-7 form-control my-1">
@@ -227,14 +200,14 @@
                             <div class="tab-content mt-3">
                                 <div class="tab-pane active" id="1x">
                                     <div>
-                                        <textarea name="w3review" style="width: 100%; height: 400px; resize: none;">At w3schools.com you will learn how to make a website.
+                                        <textarea name="w3review" style="width: 100%; height: 400px; resize: none;">@Model.Employee.ShortDescriptionNL
                                         </textarea>
                                     </div>
 
                                 </div>
                                 <div class="tab-pane" id="1y">
                                     <div>
-                                        <textarea name="w3review" style="width: 100%; height: 400px; resize: none;">dfdfbdfbdfbdfbdbbdbfd to make a website.
+                                        <textarea name="w3review" style="width: 100%; height: 400px; resize: none;">@Model.Employee.ShortDescriptionEN
                                         </textarea>
                                     </div>
                                 </div>
@@ -276,7 +249,7 @@
                                 </div>
                             </div>
                             <div>
-                                <textarea name="w3review" style="width: 100%; height: 400px; resize: none;">At w3schools.com you will learn how to make a website.
+                                <textarea name="w3review" style="width: 100%; height: 400px; resize: none;">@Model.Employee.Hobbys
                                 </textarea>
                             </div>
 
@@ -285,8 +258,6 @@
                 </div>
             </div>
             <div class="form-group">
-                @*<input type="submit" value="Save" class="btn btn-primary" />*@
-
                 <div class="row mt-3">
                     <div class="col-md">
                         <div class="d-flex justify-content-end">

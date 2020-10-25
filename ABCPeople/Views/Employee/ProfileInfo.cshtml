@@ -48,7 +48,7 @@
                         <tbody>
                             <tr>
                                 <th class="p-1 pl-1" scope="row">Werkadres</th>
-                                <td class="p-1 pl-1">Franseweg 31, 2929 Kalmthout ? </td>
+                                <td class="p-1 pl-1">@Model.PlaceOfWorkAddress.StreetName @Model.PlaceOfWorkAddress.HouseNumber, @Model.PlaceOfWorkAddress.City @Model.PlaceOfWorkAddress.Postalcode </td>
                             </tr>
                             <tr>
                                 <th class="p-1 pl-1" scope="row">Email privé</th>
@@ -68,11 +68,11 @@
                             </tr>
                             <tr>
                                 <th class="p-1 pl-1" scope="row">Nationaliteit</th>
-                                @*<td class="p-1 pl-1">@Model.Nationality</td>*@
+                                <td class="p-1 pl-1">@Model.Nationality.Name</td>
                             </tr>
                             <tr>
                                 <th class="p-1 pl-1" scope="row">Gezinssituatie</th>
-                                <td class="p-1 pl-1">@Model.FamilySituation</td>
+                                <td class="p-1 pl-1">@Model.FamilySituation.Name</td>
                             </tr>
                             <tr>
                                 <th class="p-1 pl-1" scope="row">Indiensttreding</th>

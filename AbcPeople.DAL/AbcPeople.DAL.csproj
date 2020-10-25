@@ -13,6 +13,8 @@
     <Compile Remove="Migrations\20201025144808_AddRoleEntity.Designer.cs" />
     <Compile Remove="Migrations\20201025145144_AddRoleEntity.cs" />
     <Compile Remove="Migrations\20201025145144_AddRoleEntity.Designer.cs" />
+    <Compile Remove="Migrations\20201025213316_AddFamilySituationId+NationalityIdToEmployeeEntity.cs" />
+    <Compile Remove="Migrations\20201025213316_AddFamilySituationId+NationalityIdToEmployeeEntity.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -30,11 +30,6 @@ namespace AbcPeople.BLL.Services
 
         protected override void UpdateProperties(Employee entity, DAL.Entities.Employee dalEntity)
         {
-            //dalEntity.WorkExperiences = ; // foreach !
-            //foreach (var item in entity.WorkExperiences)
-            //{
-            //}
-
             dalEntity.FirstName = entity.FirstName ?? dalEntity.FirstName;
             dalEntity.LastName = entity.LastName ?? dalEntity.LastName;
             dalEntity.Email = entity.Email ?? dalEntity.Email;
@@ -45,37 +40,28 @@ namespace AbcPeople.BLL.Services
             dalEntity.BeginDateOfWork = entity.BeginDateOfWork == default ? dalEntity.BeginDateOfWork : entity.BeginDateOfWork;
             dalEntity.EmployeeTitle = entity.EmployeeTitle ?? dalEntity.EmployeeTitle;
             dalEntity.Coach = entity.Coach ?? dalEntity.Coach;
-            //public Address PlaceOfWorkAddress { get; set; }
 
             if (entity.HomeAddress != null)
             {
-                if (dalEntity.HomeAddress == null)
-                    dalEntity.HomeAddress = new DAL.Entities.Address();
                 dalEntity.HomeAddress.StreetName = entity.HomeAddress.StreetName;
                 dalEntity.HomeAddress.HouseNumber = entity.HomeAddress.HouseNumber;
                 dalEntity.HomeAddress.City = entity.HomeAddress.City;
                 dalEntity.HomeAddress.Postalcode = entity.HomeAddress.Postalcode;
             }
 
-            //if (entity.Nationality != null)
-            //{
-            //    dalEntity.Nationality.Name = entity.Nationality.Name;
-            //}
-
-            if (entity.FamilySituation != null)
+            if(entity.PlaceOfWorkAddress != null)
             {
-                if (dalEntity.FamilySituation == null)
-                    dalEntity.FamilySituation = new DAL.Entities.FamilySituation();
-                dalEntity.FamilySituation.Name = entity.FamilySituation.Name;
+                dalEntity.PlaceOfWorkAddress.StreetName = entity.PlaceOfWorkAddress.StreetName;
+                dalEntity.PlaceOfWorkAddress.HouseNumber = entity.PlaceOfWorkAddress.HouseNumber;
+                dalEntity.PlaceOfWorkAddress.City = entity.PlaceOfWorkAddress.City;
+                dalEntity.PlaceOfWorkAddress.Postalcode = entity.HomeAddress.Postalcode;
             }
 
-            if (entity.MotherLanguage != null)
-            {
-                if (dalEntity.MotherLanguage == null)
-                    dalEntity.MotherLanguage = new DAL.Entities.Language();
-                dalEntity.MotherLanguage.Name = entity.MotherLanguage.Name;
-                dalEntity.MotherLanguage.Acronym = entity.MotherLanguage.Acronym;
-            }
+            dalEntity.NationalityId = entity.NationalityId != null ? entity.NationalityId : dalEntity.NationalityId;
+            dalEntity.FamilySituationId = entity.FamilySituationId != null ? entity.FamilySituationId : dalEntity.FamilySituationId;
+            dalEntity.MotherLanguageId = entity.MotherLanguageId != null ? entity.MotherLanguageId : dalEntity.MotherLanguageId;
+            dalEntity.RoleId = entity.Role != null ? entity.RoleId : dalEntity.RoleId;
+
             dalEntity.ShortDescriptionNL = entity.ShortDescriptionNL ?? dalEntity.ShortDescriptionNL;
             dalEntity.ShortDescriptionEN = entity.ShortDescriptionEN ?? dalEntity.ShortDescriptionEN;
             dalEntity.Hobbys = entity.Hobbys ?? dalEntity.Hobbys;
@@ -86,7 +72,5 @@ namespace AbcPeople.BLL.Services
                 Timestamp = DateTime.Now
             });
         }
-
-        //public Employee FindEmployeeInContext
     }
 }

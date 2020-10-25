@@ -9,7 +9,7 @@ namespace AbcPeople.BDO.Entities.Base
 
         public BaseEntity()
         {
-            //CreatedOn = DateTime.Now;
+            CreatedOn = DateTime.Now;
         }
     }
 }

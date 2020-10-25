@@ -4,14 +4,16 @@ using AbcPeople.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AbcPeople.DAL.Migrations
 {
     [DbContext(typeof(AbcPeopleEntities))]
-    partial class AbcPeopleEntitiesModelSnapshot : ModelSnapshot
+    [Migration("20201025152559_AdjustmentRoleEntityStringName")]
+    partial class AdjustmentRoleEntityStringName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -181,9 +183,6 @@ namespace AbcPeople.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(1)");
 
-                    b.Property<int?>("Gsm")
-                        .HasColumnType("int");
-
                     b.Property<string>("Hobbys")
                         .HasColumnType("nvarchar(max)");
 
@@ -206,9 +205,6 @@ namespace AbcPeople.DAL.Migrations
                     b.Property<string>("PrivateEmail")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("RoleId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ShortDescriptionEN")
                         .HasColumnType("nvarchar(max)");
 
@@ -229,8 +225,6 @@ namespace AbcPeople.DAL.Migrations
                     b.HasIndex("NationalityId");
 
                     b.HasIndex("PlaceOfWorkAddressId");
-
-                    b.HasIndex("RoleId");
 
                     b.ToTable("Employees");
                 });
@@ -568,10 +562,6 @@ namespace AbcPeople.DAL.Migrations
                     b.HasOne("AbcPeople.DAL.Entities.Address", "PlaceOfWorkAddress")
                         .WithMany()
                         .HasForeignKey("PlaceOfWorkAddressId");
-
-                    b.HasOne("AbcPeople.DAL.Entities.Role", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId");
                 });
 
             modelBuilder.Entity("AbcPeople.DAL.Entities.EmployeeCompetency", b =>

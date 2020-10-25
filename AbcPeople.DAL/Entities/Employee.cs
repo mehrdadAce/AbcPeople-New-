@@ -16,15 +16,18 @@ namespace AbcPeople.DAL.Entities
         public DateTime BeginDateOfWork { get; set; }
         public string EmployeeTitle { get; set; }
         public string Coach { get; set; }
+        public int? NationalityId { get; set; }
         public Nationality Nationality { get; set; }
+        public int? RoleId { get; set; }
+        public Role Role { get; set; }
         public string ShortDescriptionNL { get; set; }
         public string ShortDescriptionEN { get; set; }
         public string Hobbys { get; set; }
-
+        public int? FamilySituationId { get; set; }
         public FamilySituation FamilySituation { get; set; }
         public IEnumerable<LanguageSkill> LanguageSkills { get; set; }
         public IEnumerable<EmployeeCompetency> EmployeeCompetencies { get; set; }
-        //public int? MotherLanguageId { get; set; }
+        public int? MotherLanguageId { get; set; }
         public Language MotherLanguage { get; set; }
         public virtual ICollection<WorkExperience> WorkExperiences { get; set; }
         public int? HomeAddressId { get; set; }
@@ -32,5 +35,6 @@ namespace AbcPeople.DAL.Entities
         public int? PlaceOfWorkAddressId { get; set; }
         public Address PlaceOfWorkAddress { get; set; }
         public virtual ICollection<ProfileAdjustment> ProfileAdjustments { get; set; }
+        public int? Gsm { get; set; }
     }
 }

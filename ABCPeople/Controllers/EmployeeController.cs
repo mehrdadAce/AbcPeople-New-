@@ -16,16 +16,22 @@ namespace AbcPeople.Controllers
         private readonly IProfileAdjustmentService profileAdjustmentService;
         private readonly ILanguageService languageService;
         private readonly INationalityService nationalityService;
+        private readonly IRoleService roleService;
+        private readonly IFamilySituationService familySituationService;
 
         public EmployeeController(IEmployeeService employeeService, 
                                   IProfileAdjustmentService profileAdjustmentService,
                                   ILanguageService languageService,
-                                  INationalityService nationalityService)
+                                  INationalityService nationalityService,
+                                  IRoleService roleService,
+                                  IFamilySituationService familySituationService)
         {
             this.employeeService = employeeService;
             this.profileAdjustmentService = profileAdjustmentService;
             this.languageService = languageService;
             this.nationalityService = nationalityService;
+            this.roleService = roleService;
+            this.familySituationService = familySituationService;
         }
 
         //public IActionResult Index()
@@ -41,45 +47,78 @@ namespace AbcPeople.Controllers
 
         public IActionResult ProfileInfo()
         {
-            var currentEmployee = this.employeeService.Get(4, x => x.Include(y => y.ProfileAdjustments).Include(y => y.MotherLanguage));
+            var currentEmployee = this.employeeService.Get(4, 
+                                 x => x.Include(y => y.HomeAddress)
+                                       .Include(y => y.PlaceOfWorkAddress)
+                                       .Include(y => y.MotherLanguage)
+                                       .Include(y => y.FamilySituation)
+                                       .Include(y => y.Role)
+                                       .Include(y => y.ProfileAdjustments)
+                                       .Include(y => y.Nationality));
             return View(currentEmployee);
         }
 
-        public IActionResult ProfileInfoEdit() // ProfileInfoEdit - EditProfileUser
+        public IActionResult ProfileInfoEdit()
         {
-            //Employee currentUser = this.employeeService.Get(4, x => x.Include(y => y.HomeAddress));
-
-            IEnumerable<Language> languages = this.languageService.GetAll();
             var languageSelectListItem = new List<SelectListItem>();
-            foreach (Language language in languages)
+            foreach (Language language in this.languageService.GetAll())
             {
                 languageSelectListItem.Add(new SelectListItem { Value = language.Id.ToString(), Text = language.Name });
             }
 
-            var nationalities = this.nationalityService.GetAll();
             var nationalitySelectListItem = new List<SelectListItem>();
-            foreach (Nationality nationality in nationalities)
+            foreach (Nationality nationality in this.nationalityService.GetAll())
             {
                 nationalitySelectListItem.Add(new SelectListItem { Value = nationality.Id.ToString(), Text = nationality.Name });
             }
 
+            var roleSelectListItem = new List<SelectListItem>();
+            foreach (Role role in this.roleService.GetAll())
+            {
+                roleSelectListItem.Add(new SelectListItem { Value = role.Id.ToString(), Text = role.Name });
+            }
+
+            var familySituationSelectListItem = new List<SelectListItem>();
+            foreach (FamilySituation familySituation in this.familySituationService.GetAll())
+            {
+                familySituationSelectListItem.Add(new SelectListItem { Value = familySituation.Id.ToString(), Text = familySituation.Name });
+            }
+
             ProfileInfoViewModel profileInfoViewModel = new ProfileInfoViewModel()
             {
-                Employee = this.employeeService.Get(4, x => x.Include(y => y.HomeAddress)),
+                Employee = this.employeeService.Get(4, 
+                                 x => x.Include(y => y.HomeAddress)
+                                       .Include(y => y.PlaceOfWorkAddress)
+                                       .Include(y => y.MotherLanguage)
+                                       .Include(y => y.FamilySituation)
+                                       .Include(y => y.Role)
+                                       .Include(y => y.Nationality)),
                 Languages = languageSelectListItem,
-                Nationalities = nationalitySelectListItem
+                Nationalities = nationalitySelectListItem,
+                Roles = roleSelectListItem,
+                FamilySituations = familySituationSelectListItem
             };
             return View("ProfileInfoEdit", profileInfoViewModel);
         }
 
         [HttpPost]
-        public IActionResult SaveEditProfileUser(int id, [Bind("Employee, LanguageId, NationalityId")] ProfileInfoViewModel profileInfoViewModel)
+        public IActionResult SaveEditProfileUser(int id, [Bind("Employee")] ProfileInfoViewModel profileInfoViewModel)
         {
-            //this.employeeService.Update(employee);
-            profileInfoViewModel.Employee.MotherLanguage = this.languageService.Get(Int32.Parse(profileInfoViewModel.LanguageId));
-            profileInfoViewModel.Employee.Nationality = this.nationalityService.Get(Int32.Parse(profileInfoViewModel.NationalityId));
-            this.employeeService.Update(profileInfoViewModel.Employee);
-            return View("ProfileInfo", profileInfoViewModel.Employee);
+            this.employeeService.Update(profileInfoViewModel.Employee, 
+                                 x => x.Include(y => y.HomeAddress)
+                                       .Include(y => y.PlaceOfWorkAddress)
+                                       .Include(y => y.MotherLanguage)
+                                       .Include(y => y.FamilySituation)
+                                       .Include(y => y.Nationality)
+                                       .Include(y => y.Role));
+            var currentEmployee = this.employeeService.Get(4,
+                                 x => x.Include(y => y.HomeAddress)
+                                       .Include(y => y.PlaceOfWorkAddress)
+                                       .Include(y => y.MotherLanguage)
+                                       .Include(y => y.FamilySituation)
+                                       .Include(y => y.Nationality)
+                                       .Include(y => y.Role));
+            return View("ProfileInfo", currentEmployee);
         }
         public IActionResult ProfileWorkExperiences()
         {

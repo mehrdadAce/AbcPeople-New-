@@ -8,14 +8,15 @@ namespace AbcPeople.ViewModels
     {
         public Employee Employee { get; set; }
         public List<SelectListItem> Languages { get; set; }
-        public string LanguageId { get; set; }
+        //public string LanguageId { get; set; }
         public List<SelectListItem> Nationalities { get; set; }
-        public string NationalityId { get; set; }
+        //public string NationalityId { get; set; }
+        public List<SelectListItem> Roles { get; set; }
+        //public string RoleId { get; set; }
+        public List<SelectListItem> FamilySituations { get; set; }
 
         public ProfileInfoViewModel()
         {
-
         }
-        
     }
 }

@@ -27,7 +27,7 @@ namespace AbcPeople.DAL.EntityConfigurations
 
             builder.HasOne(p => p.FamilySituation);
             builder.HasOne(p => p.Nationality);
-
+            builder.HasOne(p => p.Role);
         }
     }
 }
