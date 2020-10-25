@@ -4,14 +4,16 @@ using AbcPeople.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AbcPeople.DAL.Migrations
 {
     [DbContext(typeof(AbcPeopleEntities))]
-    partial class AbcPeopleEntitiesModelSnapshot : ModelSnapshot
+    [Migration("20201025150006_RemoveRoleIdFromWorkExperienceEntity")]
+    partial class RemoveRoleIdFromWorkExperienceEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -509,17 +511,12 @@ namespace AbcPeople.DAL.Migrations
                     b.Property<string>("ProjectName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("RoleId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
                     b.HasIndex("EmployeeId");
-
-                    b.HasIndex("RoleId");
 
                     b.ToTable("WorkExperiences");
                 });
@@ -599,10 +596,6 @@ namespace AbcPeople.DAL.Migrations
                     b.HasOne("AbcPeople.DAL.Entities.Employee", "Employee")
                         .WithMany("WorkExperiences")
                         .HasForeignKey("EmployeeId");
-
-                    b.HasOne("AbcPeople.DAL.Entities.Role", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId");
                 });
 #pragma warning restore 612, 618
         }

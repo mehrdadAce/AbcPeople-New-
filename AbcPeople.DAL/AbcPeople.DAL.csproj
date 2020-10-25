@@ -7,6 +7,12 @@
   <ItemGroup>
     <Compile Remove="Migrations\20201023055309_AddMotherLanguageIdToEmployee.cs" />
     <Compile Remove="Migrations\20201023055309_AddMotherLanguageIdToEmployee.Designer.cs" />
+    <Compile Remove="Migrations\20201025144527_AddRoleEntity.cs" />
+    <Compile Remove="Migrations\20201025144527_AddRoleEntity.Designer.cs" />
+    <Compile Remove="Migrations\20201025144808_AddRoleEntity.cs" />
+    <Compile Remove="Migrations\20201025144808_AddRoleEntity.Designer.cs" />
+    <Compile Remove="Migrations\20201025145144_AddRoleEntity.cs" />
+    <Compile Remove="Migrations\20201025145144_AddRoleEntity.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
