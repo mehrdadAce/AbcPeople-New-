@@ -14,5 +14,6 @@ namespace AbcPeople.DAL.Entities
         //public int PlaceOfWorkAddressId { get; set; }
         //public virtual Address PlaceOfWorkAddress { get; set; }
         public Role Role { get; set; }
+        public string ProjectDescription { get; set; }
     }
 }

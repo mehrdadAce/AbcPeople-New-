@@ -18,6 +18,7 @@ namespace AbcPeople.Controllers
         private readonly INationalityService nationalityService;
         private readonly IRoleService roleService;
         private readonly IFamilySituationService familySituationService;
+        private readonly Employee currentEmployee;
 
         public EmployeeController(IEmployeeService employeeService, 
                                   IProfileAdjustmentService profileAdjustmentService,
@@ -32,6 +33,15 @@ namespace AbcPeople.Controllers
             this.nationalityService = nationalityService;
             this.roleService = roleService;
             this.familySituationService = familySituationService;
+            currentEmployee = this.employeeService.Get(4,
+                                 x => x.Include(y => y.HomeAddress)
+                                       .Include(y => y.PlaceOfWorkAddress)
+                                       .Include(y => y.MotherLanguage)
+                                       .Include(y => y.FamilySituation)
+                                       .Include(y => y.Role)
+                                       .Include(y => y.ProfileAdjustments)
+                                       .Include(y => y.Nationality)
+                                       .Include(y => y.WorkExperiences).ThenInclude(x => x.Role));
         }
 
         //public IActionResult Index()
@@ -47,15 +57,7 @@ namespace AbcPeople.Controllers
 
         public IActionResult ProfileInfo()
         {
-            var currentEmployee = this.employeeService.Get(4, 
-                                 x => x.Include(y => y.HomeAddress)
-                                       .Include(y => y.PlaceOfWorkAddress)
-                                       .Include(y => y.MotherLanguage)
-                                       .Include(y => y.FamilySituation)
-                                       .Include(y => y.Role)
-                                       .Include(y => y.ProfileAdjustments)
-                                       .Include(y => y.Nationality));
-            return View(currentEmployee);
+            return View(this.currentEmployee);
         }
 
         public IActionResult ProfileInfoEdit()
@@ -111,18 +113,39 @@ namespace AbcPeople.Controllers
                                        .Include(y => y.FamilySituation)
                                        .Include(y => y.Nationality)
                                        .Include(y => y.Role));
-            var currentEmployee = this.employeeService.Get(4,
-                                 x => x.Include(y => y.HomeAddress)
-                                       .Include(y => y.PlaceOfWorkAddress)
-                                       .Include(y => y.MotherLanguage)
-                                       .Include(y => y.FamilySituation)
-                                       .Include(y => y.Nationality)
-                                       .Include(y => y.Role));
-            return View("ProfileInfo", currentEmployee);
+            return View("ProfileInfo", this.currentEmployee);
         }
         public IActionResult ProfileWorkExperiences()
         {
-            return View();
+            return View(this.currentEmployee.WorkExperiences);
+        }
+        public IActionResult AddNewWorkExperience()
+        {
+            return View("ProfileNewWorkExperience");
+        }
+        public IActionResult AddLanguageSkills()
+        {
+            //saven
+            return View("ProfileAddLanguageSkill");
+        }
+        public IActionResult AddCertification()
+        {
+            return View("ProfileEducationAddCertificate");
+        }
+
+        public IActionResult AddCourse()
+        {
+            return View("ProfileEducationAddCourse");
+        }
+
+        public IActionResult AddExams()
+        {
+            return View("ProfileEducationAddExam");
+        }
+
+        public IActionResult AddEducation()
+        {
+            return View("ProfileEducationAddEducation");
         }
 
         public IActionResult GoToWhoIsWho()
@@ -130,42 +153,10 @@ namespace AbcPeople.Controllers
             return View("WhoIsWho");
         }
 
-        public IActionResult AddCertification()
-        {
-            return View("Certificate");
-        }
-
-        public IActionResult AddLanguageSkills()
-        {
-            //saven
-            return View("LanguageSkill");
-        }
-
-        public IActionResult AddCourse()
-        {
-            return View("Course");
-        }
-
-        public IActionResult AddExams()
-        {
-            return View("Exam");
-        }
-
-        public IActionResult AddEducation()
-        {
-            return View("Education");
-        }
-
-        public IActionResult AddNewWorkExperience()
-        {
-            return View("NewWorkExperience");
-        }
-
         public IActionResult ProfileEducations()
         {
             return View();
         }
-
        
         public IActionResult ProfileCompetencies()
         {

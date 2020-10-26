@@ -54,7 +54,6 @@ namespace AbcPeople.BLL.Services
                     entities = dbSetFunc(dbSet);
 
                 var obj = entities.FirstOrDefault(x => x.Id == id);
-                string test = "sdsfd";
                 return mapper.Map<T>(obj);
             }
             catch (Exception ex)

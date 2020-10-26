@@ -1,4 +1,5 @@
-﻿
+﻿@model IEnumerable<AbcPeople.BDO.Entities.WorkExperience>
+
 <ul class="nav nav-tabs ">
     <li class="nav-item">
         <a class="nav-link" href="/Employee/ProfileInfo">Info</a>
@@ -18,5 +19,64 @@
 </ul>
 
 <div class="container">
-    <partial name="_EmployeeWorkExperiences" />
+    <div class="d-flex justify-content-between mt-2">
+        <h5>Werkervaringen</h5>
+        <a href="/Employee/AddNewWorkExperience" class="btn btn-primary rounded float-right border-dark">
+            <i class="fas fa-plus"></i> Nieuwe werkervaring
+        </a>
+    </div>
+    @{
+        int counter = 1;
+        foreach (var workExperience in Model)
+        {
+
+            <ul class="nav nav-tabs ">
+                <li class="nav-item active">
+                    <a class="nav-link active" href="#1nl" data-toggle="tab">NL</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#2en" data-toggle="tab">EN</a>
+                </li>
+            </ul>
+            <div class="float-lg-right mt-2">
+                <button type="button" class="rounded"><i class="fas fa-edit"></i> Bewerken</button>
+                <button type="button" class="rounded"><i class="fas fa-trash-alt"></i> Verwijderen</button>
+            </div>
+
+            <div class="tab-content clearfix">
+                <div class="tab-pane active" id="1nl">
+                    <p>Van @workExperience.StartDate tot @workExperience.EndDate</p>
+                    <p class="float-right">@workExperience.CompanyName</p>
+                    <br />
+                    <p class="float-right">Overheid en publieke sector !!!!</p>
+
+                    <table class="table table-striped table-condensed">
+                        <tr>
+                            <td>Project</td>
+                            <td>@workExperience.ProjectName</td>
+                        </tr>
+                        <tr>
+                            <td>Externe rol</td>
+                            <td>@workExperience.Role.Name</td>
+                        </tr>
+                        <tr>
+                            <td>Omschrijving</td>
+                            <td style="overflow: hidden !important;">
+                                @workExperience.ProjectDescription
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Competenties</td>
+                            <td>
+                                todo !!!
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="tab-pane" id="2en">
+                </div>
+            </div>
+            counter++;
+        }
+    }
 </div>

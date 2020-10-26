@@ -37,8 +37,8 @@ namespace ABCPeople.Web.Controllers
 
         public IActionResult Index()
         {
-            var employee1 = this.employeeService.Get(1, x => x.Include(y => y.WorkExperiences)
-                                                                .Include(y => y.HomeAddress)                                       
+            var employee1 = this.employeeService.Get(1, 
+                x => x.Include(y => y.WorkExperiences).Include(y => y.HomeAddress)                                       
             );
 
             HomepageViewModel homepageViewModel = new HomepageViewModel()
