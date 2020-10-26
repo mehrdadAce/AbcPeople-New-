@@ -1,42 +1,38 @@
-﻿
-<h5>Certificaat toevoegen</h5>
+﻿@model AbcPeople.ViewModels.ProfileEducationAddCertificateViewModel;
 
-<div class="container">
-    <div class="card">
-        <div class="card-header">
-            Beheer
-        </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-lg-2">
-                    <label>Certificaat</label>
-                </div>
-                <div class="col-lg-3">
-                    <select class="form-control">
-                        <option value="1">Certificaat 1</option>
-                        <option value="2">Certificaat 4</option>
-                        <option value="3">Certificaat 3</option>
-                        <option value="4">Certificaat 7</option>
-                        <option value="5">Certificaat 8</option>
-                    </select>
-                </div>
+<h5>Certificaat toevoegen</h5>
+<form asp-action="SaveEmployeeCertificate">
+    <input type="hidden" asp-for="@Model.Employee.Id" />
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                Beheer
             </div>
-            <div class="row mt-2">
-                <div class="col-lg-2">
-                    <label>Datum behaald</label>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <label>Certificaat</label>
+                    </div>
+                    <div class="col-lg-3">
+                        <select class="form-control" asp-for="EmployeeCertificate.CertificateId" asp-items="@Model.Certificates"></select>
+                    </div>
                 </div>
-                <div class="col-lg-5">
-                    <input class="col-lg-7 form-control" type="date" name="thuisadres" value="09/09/1999" />
+                <div class="row mt-2">
+                    <div class="col-lg-2">
+                        <label>Datum behaald</label>
+                    </div>
+                    <div class="col-lg-5">
+                        <input class="col-lg-7 form-control" type="date" asp-for="EmployeeCertificate.Date" />
+                    </div>
                 </div>
+                <input type="submit" name="name" value="Certificaat toevoegen" class="btn btn-primary mt-3" />
+                <hr />
+                <p><strong>Certificaat niet gevonden? Vraag via onderstaande knop een nieuw certificaat aan. Office zal dit dan spoedig aan uw CV toevoegen.</strong></p>
+                <input type="button" name="name" value="Nieuw certificaat aanvragen" class="btn btn-primary" />
             </div>
-            <input type="button" name="name" value="Certificaat toevoegen" class="btn btn-primary mt-3" />
-            <hr />
-            <p><strong>Certificaat niet gevonden? Vraag via onderstaande knop een nieuw certificaat aan. Office zal dit dan spoedig aan uw CV toevoegen.</strong></p>
-            <input type="button" name="name" value="Nieuw certificaat aanvragen" class="btn btn-primary" />
         </div>
     </div>
-</div>
-
+</form>
 
 
 

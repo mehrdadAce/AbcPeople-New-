@@ -18,6 +18,8 @@ namespace AbcPeople.Controllers
         private readonly INationalityService nationalityService;
         private readonly IRoleService roleService;
         private readonly IFamilySituationService familySituationService;
+        private readonly ICertificateService certificateService;
+        private readonly IEmployeeCertificateService employeeCertificateService;
         private readonly Employee currentEmployee;
 
         public EmployeeController(IEmployeeService employeeService, 
@@ -25,7 +27,9 @@ namespace AbcPeople.Controllers
                                   ILanguageService languageService,
                                   INationalityService nationalityService,
                                   IRoleService roleService,
-                                  IFamilySituationService familySituationService)
+                                  IFamilySituationService familySituationService,
+                                  ICertificateService certificateService,
+                                  IEmployeeCertificateService employeeCertificateService)
         {
             this.employeeService = employeeService;
             this.profileAdjustmentService = profileAdjustmentService;
@@ -33,7 +37,9 @@ namespace AbcPeople.Controllers
             this.nationalityService = nationalityService;
             this.roleService = roleService;
             this.familySituationService = familySituationService;
-            currentEmployee = this.employeeService.Get(4,
+            this.certificateService = certificateService;
+            this.employeeCertificateService = employeeCertificateService;
+            this.currentEmployee = this.employeeService.Get(4,
                                  x => x.Include(y => y.HomeAddress)
                                        .Include(y => y.PlaceOfWorkAddress)
                                        .Include(y => y.MotherLanguage)
@@ -42,7 +48,8 @@ namespace AbcPeople.Controllers
                                        .Include(y => y.ProfileAdjustments)
                                        .Include(y => y.Nationality)
                                        .Include(y => y.WorkExperiences).ThenInclude(x => x.Role)
-                                       .Include(y => y.LanguageSkills));
+                                       .Include(y => y.LanguageSkills)
+                                       .Include(y => y.EmployeeCertificates).ThenInclude(x => x.Certificate));
         }
 
         //public IActionResult Index()
@@ -129,9 +136,34 @@ namespace AbcPeople.Controllers
             //saven
             return View("ProfileAddLanguageSkill");
         }
-        public IActionResult AddCertification()
+        public IActionResult ShowAddCertification()
         {
-            return View("ProfileEducationAddCertificate");
+            var certificates = new List<SelectListItem>();
+            foreach (var item in this.certificateService.GetAll())
+            {
+                certificates.Add(new SelectListItem() { Value = item.Id.ToString(), Text = item.Title });
+            }
+            ProfileEducationAddCertificateViewModel vm = new ProfileEducationAddCertificateViewModel()
+            {
+                Employee = this.currentEmployee,
+                Certificates = certificates,
+                EmployeeCertificate = new EmployeeCertificate()
+                {
+                    EmployeeId = this.currentEmployee.Id
+                }
+            };
+            return View("ProfileEducationAddCertificate", vm);
+        }
+
+        [HttpPost]
+        public IActionResult SaveEmployeeCertificate(int id, [Bind("Employee,EmployeeCertificate")] ProfileEducationAddCertificateViewModel profileInfoViewModel)
+        {
+            this.employeeCertificateService.Create(new EmployeeCertificate() { 
+                EmployeeId = profileInfoViewModel.Employee.Id, 
+                CertificateId = profileInfoViewModel.EmployeeCertificate.CertificateId,
+                Date = profileInfoViewModel.EmployeeCertificate.Date
+            });
+            return View("ProfileEducations");
         }
 
         public IActionResult AddCourse()

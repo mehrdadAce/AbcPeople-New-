@@ -35,5 +35,6 @@ namespace AbcPeople.BDO.Entities
         public List<ProfileAdjustment> ProfileAdjustments { get; set; }
         public int? Gsm { get; set; }
         public List<EmployeeExam> EmployeeExams { get; set; }
+        public ICollection<EmployeeCertificate> EmployeeCertificates { get; set; }
     }
 }
