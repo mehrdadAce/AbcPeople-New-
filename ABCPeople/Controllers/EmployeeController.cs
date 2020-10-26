@@ -20,6 +20,8 @@ namespace AbcPeople.Controllers
         private readonly IFamilySituationService familySituationService;
         private readonly ICertificateService certificateService;
         private readonly IEmployeeCertificateService employeeCertificateService;
+        private readonly IExamService examService;
+        private readonly IEmployeeExamService employeeExamService;
         private readonly Employee currentEmployee;
 
         public EmployeeController(IEmployeeService employeeService, 
@@ -29,7 +31,9 @@ namespace AbcPeople.Controllers
                                   IRoleService roleService,
                                   IFamilySituationService familySituationService,
                                   ICertificateService certificateService,
-                                  IEmployeeCertificateService employeeCertificateService)
+                                  IEmployeeCertificateService employeeCertificateService,
+                                  IExamService examService,
+                                  IEmployeeExamService employeeExamService)
         {
             this.employeeService = employeeService;
             this.profileAdjustmentService = profileAdjustmentService;
@@ -39,6 +43,8 @@ namespace AbcPeople.Controllers
             this.familySituationService = familySituationService;
             this.certificateService = certificateService;
             this.employeeCertificateService = employeeCertificateService;
+            this.examService = examService;
+            this.employeeExamService = employeeExamService;
             this.currentEmployee = this.employeeService.Get(4,
                                  x => x.Include(y => y.HomeAddress)
                                        .Include(y => y.PlaceOfWorkAddress)
@@ -51,17 +57,6 @@ namespace AbcPeople.Controllers
                                        .Include(y => y.LanguageSkills)
                                        .Include(y => y.EmployeeCertificates).ThenInclude(x => x.Certificate));
         }
-
-        //public IActionResult Index()
-        //{
-        //    var employeeViewModel = new EmployeeViewModel()
-        //    {
-        //        Employees = this.employeeRepository.GetAll(),
-        //        ProfileAdjustments = this.profileAdjustmentRepository.GetAllAdjustments()
-        //    };
-
-        //    return View(employeeViewModel);
-        //}
 
         public IActionResult ProfileInfo()
         {
@@ -156,12 +151,38 @@ namespace AbcPeople.Controllers
         }
 
         [HttpPost]
-        public IActionResult SaveEmployeeCertificate(int id, [Bind("Employee,EmployeeCertificate")] ProfileEducationAddCertificateViewModel profileInfoViewModel)
+        public IActionResult SaveEmployeeCertificate(int id, [Bind("Employee,EmployeeCertificate")] ProfileEducationAddCertificateViewModel profileEducationAddCertificateViewModel)
         {
             this.employeeCertificateService.Create(new EmployeeCertificate() { 
-                EmployeeId = profileInfoViewModel.Employee.Id, 
-                CertificateId = profileInfoViewModel.EmployeeCertificate.CertificateId,
-                Date = profileInfoViewModel.EmployeeCertificate.Date
+                EmployeeId = profileEducationAddCertificateViewModel.Employee.Id, 
+                CertificateId = profileEducationAddCertificateViewModel.EmployeeCertificate.CertificateId,
+                Date = profileEducationAddCertificateViewModel.EmployeeCertificate.Date
+            });
+            return View("ProfileEducations");
+        }
+
+        public IActionResult ShowAddEmployeeExamView()
+        {
+            var exams = new List<SelectListItem>();
+            foreach (var item in this.examService.GetAll())
+            {
+                exams.Add(new SelectListItem() { Value = item.Id.ToString(), Text = item.Title });
+            }
+            var vm = new ProfileEducationAddExamViewModel()
+            {
+                EmployeeExam = new EmployeeExam(),
+                Exams = exams
+            };
+            return View("ProfileEducationAddExam", vm);
+        }
+
+        public IActionResult SaveEmployeeExam([Bind("EmployeeExam")] ProfileEducationAddExamViewModel profileEducationAddExamViewModel)
+        {
+            this.employeeExamService.Create(new EmployeeExam()
+            {
+                EmployeeId = this.currentEmployee.Id,
+                ExamId = profileEducationAddExamViewModel.EmployeeExam.ExamId,
+                Date = profileEducationAddExamViewModel.EmployeeExam.Date
             });
             return View("ProfileEducations");
         }
@@ -169,11 +190,6 @@ namespace AbcPeople.Controllers
         public IActionResult AddCourse()
         {
             return View("ProfileEducationAddCourse");
-        }
-
-        public IActionResult AddExams()
-        {
-            return View("ProfileEducationAddExam");
         }
 
         public IActionResult AddEducation()
