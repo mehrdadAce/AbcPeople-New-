@@ -22,6 +22,8 @@ namespace AbcPeople.DAL
         public DbSet<Competency> Competencies { get; set; }
         public DbSet<KnowledgeLevel> KnowledgeLevels { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<EmployeeTitle> EmployeeTitles { get; set; }
+        public DbSet<SeniorityLevel> SeniorityLevels { get; set; }
 
         public AbcPeopleEntities(DbContextOptions options) : base(options)
         {
@@ -46,6 +48,8 @@ namespace AbcPeople.DAL
             modelBuilder.ApplyConfiguration(new CompetencyEntityConfiguration()); 
             modelBuilder.ApplyConfiguration(new KnowledgeLevelEntityConfiguration()); 
             modelBuilder.ApplyConfiguration(new RoleEntityConfiguration()); 
+            modelBuilder.ApplyConfiguration(new EmployeeTitleEntityConfiguration()); 
+            modelBuilder.ApplyConfiguration(new SeniorityLevelEntityConfiguration()); 
         }
     }
 }

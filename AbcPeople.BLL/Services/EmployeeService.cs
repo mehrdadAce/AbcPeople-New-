@@ -38,7 +38,7 @@ namespace AbcPeople.BLL.Services
             dalEntity.DateOfBirth = entity.DateOfBirth == default ?  dalEntity.DateOfBirth : entity.DateOfBirth;
             dalEntity.Gender = entity.Gender == default(char) ? dalEntity.Gender : entity.Gender;
             dalEntity.BeginDateOfWork = entity.BeginDateOfWork == default ? dalEntity.BeginDateOfWork : entity.BeginDateOfWork;
-            dalEntity.EmployeeTitle = entity.EmployeeTitle ?? dalEntity.EmployeeTitle;
+            //dalEntity.EmployeeTitle = entity.EmployeeTitle ?? dalEntity.EmployeeTitle;
             dalEntity.Coach = entity.Coach ?? dalEntity.Coach;
 
             if (entity.HomeAddress != null)

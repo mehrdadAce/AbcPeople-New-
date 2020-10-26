@@ -31,6 +31,8 @@ namespace AbcPeople.BLL.Helpers
             services.AddScoped<ICompetencyService, CompetencyService>();
             services.AddScoped<IKnowledgeLevelService, KnowledgeLevelService>();
             services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<IEmployeeTitleService, EmployeeTitleService>();
+            services.AddScoped<ISeniorityLevelService, SeniorityLevelService>();
 
         }
     }

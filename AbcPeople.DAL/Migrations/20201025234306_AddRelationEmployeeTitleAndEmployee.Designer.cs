@@ -4,14 +4,16 @@ using AbcPeople.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AbcPeople.DAL.Migrations
 {
     [DbContext(typeof(AbcPeopleEntities))]
-    partial class AbcPeopleEntitiesModelSnapshot : ModelSnapshot
+    [Migration("20201025234306_AddRelationEmployeeTitleAndEmployee")]
+    partial class AddRelationEmployeeTitleAndEmployee
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -332,16 +334,11 @@ namespace AbcPeople.DAL.Migrations
                     b.Property<string>("Domain")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("SeniorityLevelId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("SeniorityLevelId");
 
                     b.ToTable("EmployeeTitles");
                 });
@@ -524,31 +521,6 @@ namespace AbcPeople.DAL.Migrations
                     b.ToTable("Roles");
                 });
 
-            modelBuilder.Entity("AbcPeople.DAL.Entities.SeniorityLevel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Level")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SeniorityLevels");
-                });
-
             modelBuilder.Entity("AbcPeople.DAL.Entities.WorkExperience", b =>
                 {
                     b.Property<int>("Id")
@@ -648,13 +620,6 @@ namespace AbcPeople.DAL.Migrations
                         .HasForeignKey("KnowledgeLevelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("AbcPeople.DAL.Entities.EmployeeTitle", b =>
-                {
-                    b.HasOne("AbcPeople.DAL.Entities.SeniorityLevel", "SeniorityLevel")
-                        .WithMany()
-                        .HasForeignKey("SeniorityLevelId");
                 });
 
             modelBuilder.Entity("AbcPeople.DAL.Entities.LanguageSkill", b =>

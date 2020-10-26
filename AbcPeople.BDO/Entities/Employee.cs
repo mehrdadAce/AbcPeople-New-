@@ -14,7 +14,7 @@ namespace AbcPeople.BDO.Entities
         public DateTime DateOfBirth { get; set; }
         public char Gender { get; set; }
         public DateTime BeginDateOfWork { get; set; }
-        public string EmployeeTitle { get; set; }
+        public EmployeeTitle EmployeeTitle { get; set; }
         public string Coach { get; set; }
         //public Address PlaceOfWorkAddress { get; set; }
         public int? RoleId { get; set; }

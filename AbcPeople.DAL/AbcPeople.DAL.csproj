@@ -15,6 +15,12 @@
     <Compile Remove="Migrations\20201025145144_AddRoleEntity.Designer.cs" />
     <Compile Remove="Migrations\20201025213316_AddFamilySituationId+NationalityIdToEmployeeEntity.cs" />
     <Compile Remove="Migrations\20201025213316_AddFamilySituationId+NationalityIdToEmployeeEntity.Designer.cs" />
+    <Compile Remove="Migrations\20201025233155_AddEmployeeTitleEntity.cs" />
+    <Compile Remove="Migrations\20201025233155_AddEmployeeTitleEntity.Designer.cs" />
+    <Compile Remove="Migrations\20201025233619_AddRelationEmployeeTitleAndEmployee.cs" />
+    <Compile Remove="Migrations\20201025233619_AddRelationEmployeeTitleAndEmployee.Designer.cs" />
+    <Compile Remove="Migrations\20201025234032_AddRelationEmployeeTitleAndEmployee.cs" />
+    <Compile Remove="Migrations\20201025234032_AddRelationEmployeeTitleAndEmployee.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

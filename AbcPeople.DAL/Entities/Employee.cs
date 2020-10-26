@@ -14,7 +14,8 @@ namespace AbcPeople.DAL.Entities
         public DateTime DateOfBirth { get; set; }
         public char Gender { get; set; }
         public DateTime BeginDateOfWork { get; set; }
-        public string EmployeeTitle { get; set; }
+        public int? EmployeeTitleId { get; set; }
+        public EmployeeTitle EmployeeTitle { get; set; }
         public string Coach { get; set; }
         public int? NationalityId { get; set; }
         public Nationality Nationality { get; set; }

@@ -13,21 +13,19 @@ namespace AbcPeople.DAL.EntityConfigurations
             builder.Property(p => p.FirstName).HasMaxLength(50);
             builder.Property(p => p.LastName).HasMaxLength(100);
 
-            builder.HasMany(p => p.WorkExperiences);
-
             builder.HasOne(p => p.HomeAddress);
             builder.HasOne(p => p.PlaceOfWorkAddress);
-
-            builder.HasMany(p => p.ProfileAdjustments);
-
             builder.HasOne(p => p.MotherLanguage);
-
-            builder.HasMany(p => p.EmployeeCompetencies);
-            builder.HasMany(p => p.LanguageSkills);
-
             builder.HasOne(p => p.FamilySituation);
             builder.HasOne(p => p.Nationality);
             builder.HasOne(p => p.Role);
+            builder.HasOne(p => p.EmployeeTitle);
+
+            builder.HasMany(p => p.WorkExperiences);
+            builder.HasMany(p => p.ProfileAdjustments);
+            builder.HasMany(p => p.EmployeeCompetencies);
+            builder.HasMany(p => p.LanguageSkills);
+            
         }
     }
 }
