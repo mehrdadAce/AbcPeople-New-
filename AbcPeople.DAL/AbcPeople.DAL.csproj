@@ -23,6 +23,8 @@
     <Compile Remove="Migrations\20201025234032_AddRelationEmployeeTitleAndEmployee.Designer.cs" />
     <Compile Remove="Migrations\20201026072515_AddRelationshipToLangugaInLanguageSkills.cs" />
     <Compile Remove="Migrations\20201026072515_AddRelationshipToLangugaInLanguageSkills.Designer.cs" />
+    <Compile Remove="Migrations\20201026075802_AddRelashionshipBetweenCityEntityAndAddressEntity.cs" />
+    <Compile Remove="Migrations\20201026075802_AddRelashionshipBetweenCityEntityAndAddressEntity.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

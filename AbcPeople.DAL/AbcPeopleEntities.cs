@@ -52,6 +52,8 @@ namespace AbcPeople.DAL
             modelBuilder.ApplyConfiguration(new EmployeeTitleEntityConfiguration()); 
             modelBuilder.ApplyConfiguration(new SeniorityLevelEntityConfiguration()); 
             modelBuilder.ApplyConfiguration(new CountryEntityConfiguration()); 
+            modelBuilder.ApplyConfiguration(new CertificateEntityConfiguration()); 
+            modelBuilder.ApplyConfiguration(new EmployeeCertificateEntityConfiguration()); 
         }
     }
 }

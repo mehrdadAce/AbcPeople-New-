@@ -25,6 +25,8 @@ namespace AbcPeople.BLL.Helpers
             CreateMap<BDO.Entities.EmployeeTitle, DAL.Entities.EmployeeTitle>().ReverseMap(); 
             CreateMap<BDO.Entities.SeniorityLevel, DAL.Entities.SeniorityLevel>().ReverseMap(); 
             CreateMap<BDO.Entities.Country, DAL.Entities.Country>().ReverseMap(); 
+            CreateMap<BDO.Entities.Certificate, DAL.Entities.Certificate>().ReverseMap(); 
+            CreateMap<BDO.Entities.EmployeeCertificate, DAL.Entities.EmployeeCertificate>().ReverseMap(); 
         }
     }
 }

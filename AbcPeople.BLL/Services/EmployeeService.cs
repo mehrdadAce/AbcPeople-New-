@@ -45,16 +45,18 @@ namespace AbcPeople.BLL.Services
             {
                 dalEntity.HomeAddress.StreetName = entity.HomeAddress.StreetName;
                 dalEntity.HomeAddress.HouseNumber = entity.HomeAddress.HouseNumber;
-                dalEntity.HomeAddress.City = entity.HomeAddress.City;
+                dalEntity.HomeAddress.CityId = entity.HomeAddress.CityId;
                 dalEntity.HomeAddress.Postalcode = entity.HomeAddress.Postalcode;
+                dalEntity.HomeAddress.CountryId = entity.HomeAddress.CountryId;
             }
 
             if(entity.PlaceOfWorkAddress != null)
             {
                 dalEntity.PlaceOfWorkAddress.StreetName = entity.PlaceOfWorkAddress.StreetName;
                 dalEntity.PlaceOfWorkAddress.HouseNumber = entity.PlaceOfWorkAddress.HouseNumber;
-                dalEntity.PlaceOfWorkAddress.City = entity.PlaceOfWorkAddress.City;
-                dalEntity.PlaceOfWorkAddress.Postalcode = entity.HomeAddress.Postalcode;
+                dalEntity.PlaceOfWorkAddress.CityId = entity.PlaceOfWorkAddress.CityId;
+                dalEntity.PlaceOfWorkAddress.Postalcode = entity.PlaceOfWorkAddress.Postalcode;
+                dalEntity.PlaceOfWorkAddress.CountryId = entity.PlaceOfWorkAddress.CountryId;
             }
 
             dalEntity.NationalityId = entity.NationalityId != null ? entity.NationalityId : dalEntity.NationalityId;

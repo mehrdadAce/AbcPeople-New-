@@ -37,5 +37,6 @@ namespace AbcPeople.DAL.Entities
         public Address PlaceOfWorkAddress { get; set; }
         public virtual ICollection<ProfileAdjustment> ProfileAdjustments { get; set; }
         public int? Gsm { get; set; }
+        public virtual ICollection<EmployeeCertificate> EmployeeCertificates { get; set; }
     }
 }
