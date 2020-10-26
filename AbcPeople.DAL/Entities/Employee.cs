@@ -38,5 +38,6 @@ namespace AbcPeople.DAL.Entities
         public virtual ICollection<ProfileAdjustment> ProfileAdjustments { get; set; }
         public int? Gsm { get; set; }
         public virtual ICollection<EmployeeCertificate> EmployeeCertificates { get; set; }
+        public virtual ICollection<EmployeeExam> EmployeeExams { get; set; }
     }
 }

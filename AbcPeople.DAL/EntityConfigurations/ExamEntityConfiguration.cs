@@ -11,6 +11,8 @@ namespace AbcPeople.DAL.EntityConfigurations
             base.Configure(builder);
 
             builder.Property(p => p.Title).IsRequired();
+
+            builder.HasMany(p => p.EmployeeExams);
         }
     }
 }
