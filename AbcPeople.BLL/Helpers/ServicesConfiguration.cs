@@ -36,7 +36,7 @@ namespace AbcPeople.BLL.Helpers
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<ICertificateService, CertificateService>();
             services.AddScoped<IEmployeeCertificateService, EmployeeCertificateService>();
-
+            services.AddScoped<IExamService, ExamService>();
         }
     }
 }

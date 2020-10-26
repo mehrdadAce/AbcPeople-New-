@@ -25,6 +25,9 @@ namespace AbcPeople.DAL
         public DbSet<EmployeeTitle> EmployeeTitles { get; set; }
         public DbSet<SeniorityLevel> SeniorityLevels { get; set; }
         public DbSet<Country> Countries { get; set; }
+        public DbSet<Certificate> Certificates { get; set; }
+        public DbSet<EmployeeCertificate> EmployeeCertificates { get; set; }
+        public DbSet<Exam> Exams { get; set; }
 
         public AbcPeopleEntities(DbContextOptions options) : base(options)
         {
@@ -54,6 +57,7 @@ namespace AbcPeople.DAL
             modelBuilder.ApplyConfiguration(new CountryEntityConfiguration()); 
             modelBuilder.ApplyConfiguration(new CertificateEntityConfiguration()); 
             modelBuilder.ApplyConfiguration(new EmployeeCertificateEntityConfiguration()); 
+            modelBuilder.ApplyConfiguration(new ExamEntityConfiguration()); 
         }
     }
 }
