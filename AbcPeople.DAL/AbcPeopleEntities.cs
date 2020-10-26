@@ -17,7 +17,7 @@ namespace AbcPeople.DAL
         public DbSet<EmployeeExam> EmployeeExams { get; set; }
         public DbSet<EmployeeEducation> EmployeeEducations { get; set; }
         public DbSet<Nationality> Nationalities { get; set; }
-        public DbSet<Course> Cources { get; set; }
+        public DbSet<Course> Courses { get; set; }
         public DbSet<LanguageSkill> LanguageSkills { get; set; }
         public DbSet<Competency> Competencies { get; set; }
         public DbSet<KnowledgeLevel> KnowledgeLevels { get; set; }
