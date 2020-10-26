@@ -39,5 +39,6 @@ namespace AbcPeople.DAL.Entities
         public int? Gsm { get; set; }
         public virtual ICollection<EmployeeCertificate> EmployeeCertificates { get; set; }
         public virtual ICollection<EmployeeExam> EmployeeExams { get; set; }
+        public virtual ICollection<EmployeeCourse> EmployeeCourses { get; set; }
     }
 }

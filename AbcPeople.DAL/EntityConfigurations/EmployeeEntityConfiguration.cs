@@ -27,6 +27,7 @@ namespace AbcPeople.DAL.EntityConfigurations
             builder.HasMany(p => p.LanguageSkills);
             builder.HasMany(p => p.EmployeeCertificates);
             builder.HasMany(p => p.EmployeeExams);
+            builder.HasMany(p => p.EmployeeCourses);
         }
     }
 }

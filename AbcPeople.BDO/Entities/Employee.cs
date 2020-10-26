@@ -36,5 +36,6 @@ namespace AbcPeople.BDO.Entities
         public int? Gsm { get; set; }
         public List<EmployeeExam> EmployeeExams { get; set; }
         public ICollection<EmployeeCertificate> EmployeeCertificates { get; set; }
+        public ICollection<EmployeeCourse> EmployeeCourses { get; set; }
     }
 }

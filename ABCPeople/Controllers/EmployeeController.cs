@@ -22,7 +22,7 @@ namespace AbcPeople.Controllers
         private readonly IEmployeeCertificateService employeeCertificateService;
         private readonly IExamService examService;
         private readonly IEmployeeExamService employeeExamService;
-        private readonly Employee currentEmployee;
+        private Employee currentEmployee;
 
         public EmployeeController(IEmployeeService employeeService, 
                                   IProfileAdjustmentService profileAdjustmentService,
@@ -45,6 +45,11 @@ namespace AbcPeople.Controllers
             this.employeeCertificateService = employeeCertificateService;
             this.examService = examService;
             this.employeeExamService = employeeExamService;
+            RefreshEmployee();
+        }
+
+        private void RefreshEmployee()
+        {
             this.currentEmployee = this.employeeService.Get(4,
                                  x => x.Include(y => y.HomeAddress)
                                        .Include(y => y.PlaceOfWorkAddress)
@@ -55,7 +60,8 @@ namespace AbcPeople.Controllers
                                        .Include(y => y.Nationality)
                                        .Include(y => y.WorkExperiences).ThenInclude(x => x.Role)
                                        .Include(y => y.LanguageSkills)
-                                       .Include(y => y.EmployeeCertificates).ThenInclude(x => x.Certificate));
+                                       .Include(y => y.EmployeeCertificates).ThenInclude(x => x.Certificate)
+                                       .Include(y => y.EmployeeExams).ThenInclude(x => x.Exam));
         }
 
         public IActionResult ProfileInfo()
@@ -158,7 +164,8 @@ namespace AbcPeople.Controllers
                 CertificateId = profileEducationAddCertificateViewModel.EmployeeCertificate.CertificateId,
                 Date = profileEducationAddCertificateViewModel.EmployeeCertificate.Date
             });
-            return View("ProfileEducations");
+            RefreshEmployee();
+            return View("ProfileEducations", this.currentEmployee);
         }
 
         public IActionResult ShowAddEmployeeExamView()
@@ -184,7 +191,8 @@ namespace AbcPeople.Controllers
                 ExamId = profileEducationAddExamViewModel.EmployeeExam.ExamId,
                 Date = profileEducationAddExamViewModel.EmployeeExam.Date
             });
-            return View("ProfileEducations");
+            RefreshEmployee();
+            return View("ProfileEducations", this.currentEmployee);
         }
 
         public IActionResult AddCourse()
@@ -204,7 +212,7 @@ namespace AbcPeople.Controllers
 
         public IActionResult ProfileEducations()
         {
-            return View();
+            return View(this.currentEmployee);
         }
        
         public IActionResult ProfileCompetencies()

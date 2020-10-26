@@ -28,6 +28,7 @@ namespace AbcPeople.DAL
         public DbSet<Certificate> Certificates { get; set; }
         public DbSet<EmployeeCertificate> EmployeeCertificates { get; set; }
         public DbSet<Exam> Exams { get; set; }
+        public DbSet<EmployeeCourse> EmployeeCourses { get; set; }
 
         public AbcPeopleEntities(DbContextOptions options) : base(options)
         {
@@ -58,6 +59,7 @@ namespace AbcPeople.DAL
             modelBuilder.ApplyConfiguration(new CertificateEntityConfiguration()); 
             modelBuilder.ApplyConfiguration(new EmployeeCertificateEntityConfiguration()); 
             modelBuilder.ApplyConfiguration(new ExamEntityConfiguration()); 
+            modelBuilder.ApplyConfiguration(new EmployeeCourseEntityConfiguration()); 
         }
     }
 }
