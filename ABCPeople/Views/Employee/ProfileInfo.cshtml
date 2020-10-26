@@ -80,7 +80,14 @@
                             </tr>
                             <tr>
                                 <th class="p-1 pl-1" scope="row">Laatst aangepast</th>
-                                <td class="p-1 pl-1">@Model.ProfileAdjustments.OrderByDescending(x => x.Timestamp).FirstOrDefault().Timestamp.ToString("dd/mm/yyyy")</td>
+                                <td class="p-1 pl-1">
+                                    @{
+                                        if (@Model.ProfileAdjustments.Count() != 0)
+                                        {
+                                            @Model.ProfileAdjustments.OrderByDescending(x => x.Timestamp).FirstOrDefault().Timestamp.ToString("dd/mm/yyyy")
+                                        }
+                                    }
+                                </td>
                             </tr>
                         </tbody>
                     </table>
