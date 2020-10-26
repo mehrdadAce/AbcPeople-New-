@@ -33,6 +33,7 @@ namespace AbcPeople.BLL.Helpers
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<IEmployeeTitleService, EmployeeTitleService>();
             services.AddScoped<ISeniorityLevelService, SeniorityLevelService>();
+            services.AddScoped<ICountryService, CountryService>();
 
         }
     }

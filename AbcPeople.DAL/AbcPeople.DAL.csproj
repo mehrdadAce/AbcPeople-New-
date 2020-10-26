@@ -21,6 +21,8 @@
     <Compile Remove="Migrations\20201025233619_AddRelationEmployeeTitleAndEmployee.Designer.cs" />
     <Compile Remove="Migrations\20201025234032_AddRelationEmployeeTitleAndEmployee.cs" />
     <Compile Remove="Migrations\20201025234032_AddRelationEmployeeTitleAndEmployee.Designer.cs" />
+    <Compile Remove="Migrations\20201026072515_AddRelationshipToLangugaInLanguageSkills.cs" />
+    <Compile Remove="Migrations\20201026072515_AddRelationshipToLangugaInLanguageSkills.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

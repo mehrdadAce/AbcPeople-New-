@@ -13,7 +13,7 @@ namespace AbcPeople.DAL.EntityConfigurations
             builder.Property(p => p.WriteLevel).IsRequired();
             builder.Property(p => p.SpeakLevel).IsRequired();
             builder.Property(p => p.EmployeeId).IsRequired();
-            builder.Property(p => p.LanguageId).IsRequired();
+            builder.HasOne(p => p.Language);
         }
     }
 }

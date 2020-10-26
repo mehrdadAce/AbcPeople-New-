@@ -41,7 +41,8 @@ namespace AbcPeople.Controllers
                                        .Include(y => y.Role)
                                        .Include(y => y.ProfileAdjustments)
                                        .Include(y => y.Nationality)
-                                       .Include(y => y.WorkExperiences).ThenInclude(x => x.Role));
+                                       .Include(y => y.WorkExperiences).ThenInclude(x => x.Role)
+                                       .Include(y => y.LanguageSkills));
         }
 
         //public IActionResult Index()

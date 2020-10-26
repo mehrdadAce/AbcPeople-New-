@@ -7,6 +7,8 @@ namespace AbcPeople.DAL.Entities
         public int WriteLevel { get; set; }
         public int SpeakLevel { get; set; }
         public int EmployeeId { get; set; }
+        //public int LanguageId { get; set; }
         public int LanguageId { get; set; }
+        public Language Language { get; set; }
     }
 }

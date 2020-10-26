@@ -9,7 +9,8 @@ namespace AbcPeople.BDO.Entities
         public DateTime? EndDate { get; set; }
         public string CompanyName { get; set; }
         public string ProjectName { get; set; }
-        public string ProjectDescription { get; set; }
+        public string ProjectDescriptionEn { get; set; }
+        public string ProjectDescriptionNl { get; set; }
         public Role Role { get; set; }
 
     }

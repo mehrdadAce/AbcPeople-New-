@@ -24,6 +24,7 @@ namespace AbcPeople.DAL
         public DbSet<Role> Roles { get; set; }
         public DbSet<EmployeeTitle> EmployeeTitles { get; set; }
         public DbSet<SeniorityLevel> SeniorityLevels { get; set; }
+        public DbSet<Country> Countries { get; set; }
 
         public AbcPeopleEntities(DbContextOptions options) : base(options)
         {
@@ -50,6 +51,7 @@ namespace AbcPeople.DAL
             modelBuilder.ApplyConfiguration(new RoleEntityConfiguration()); 
             modelBuilder.ApplyConfiguration(new EmployeeTitleEntityConfiguration()); 
             modelBuilder.ApplyConfiguration(new SeniorityLevelEntityConfiguration()); 
+            modelBuilder.ApplyConfiguration(new CountryEntityConfiguration()); 
         }
     }
 }
