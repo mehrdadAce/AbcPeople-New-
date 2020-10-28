@@ -14,12 +14,12 @@ namespace AbcPeople.DAL.Entities
         public DateTime DateOfBirth { get; set; }
         public char Gender { get; set; } //todo : enum -> int in db!
         public DateTime BeginDateOfWork { get; set; }
-        public int? EmployeeTitleId { get; set; } // todo
+        public int EmployeeTitleId { get; set; } // todo
         public EmployeeTitle EmployeeTitle { get; set; }
         public string Coach { get; set; }
         public int NationalityId { get; set; }
         public Nationality Nationality { get; set; }
-        public int? RoleId { get; set; }
+        public int RoleId { get; set; }
         public Role Role { get; set; }
         public string ShortDescriptionNL { get; set; }
         public string ShortDescriptionEN { get; set; }
@@ -28,7 +28,7 @@ namespace AbcPeople.DAL.Entities
         public FamilySituation FamilySituation { get; set; }
         public IEnumerable<LanguageSkill> LanguageSkills { get; set; }
         public IEnumerable<EmployeeCompetency> EmployeeCompetencies { get; set; }
-        public int? MotherLanguageId { get; set; }
+        public int? MotherLanguageId { get; set; } // todo - Error Introducing FOREIGN KEY constraint may cause cycles or multiple cascade paths
         public Language MotherLanguage { get; set; }
         public virtual ICollection<WorkExperience> WorkExperiences { get; set; }
         public int HomeAddressId { get; set; }
