@@ -19,17 +19,13 @@ namespace AbcPeople.BLL.Services
         {
             try
             {
-                var testa = dbSet.Where(e => e.DateOfBirth.Month > DateTime.Now.Month && e.DateOfBirth.Day > DateTime.Now.Day).ToList();
-
-                var test = dbSet.Where(e => e.DateOfBirth.Month > DateTime.Now.Month && e.DateOfBirth.Day > DateTime.Now.Day)
-                    .OrderByDescending(e => e.DateOfBirth.Month).OrderByDescending(e => e.DateOfBirth.Day)
-                    .ToList();
-
-                //var test2 = dbSet.Where(e => e.DateOfBirthDateTime.Now.Month && e.DateOfBirth.Day >= DateTime.Now.Day)
-                //  .OrderByDescending(e => e.DateOfBirth)
-                //  .ToList();
-
-                return mapper.Map<IEnumerable<Employee>>(dbSet.Where(e => e.DateOfBirth.Month >= DateTime.Now.Month && e.DateOfBirth.Day >= DateTime.Now.Day).OrderByDescending(e => e.DateOfBirth).ToList());
+                int doy = DateTime.Today.Month * 31 + DateTime.Today.Day;
+                var results = dbSet.Where(a => a.DateOfBirth != null)
+                             .OrderBy(a =>
+                                (a.DateOfBirth.Month * 31 + a.DateOfBirth.Day) +
+                                (a.DateOfBirth.Month * 31 + a.DateOfBirth.Day > doy ? 0 : 400))
+                                .Take(15).ToList();
+                return mapper.Map<IEnumerable<Employee>>(results);
             }
             catch (Exception ex)
             {

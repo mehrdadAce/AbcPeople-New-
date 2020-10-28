@@ -45,7 +45,7 @@
                 </div>
                 <table class="table table-striped">
                     <tbody>
-                        @foreach (var employee in @Model.Employees.Where(x => x.DateOfBirth.Month == DateTime.Now.Month))
+                        @foreach (var employee in @Model.Employees)
                         {
                             <tr>
                                 <td><a href="#">@employee.FirstName @employee.LastName</a> wordt @(DateTime.Now.Year - employee.DateOfBirth.Year)</td>
