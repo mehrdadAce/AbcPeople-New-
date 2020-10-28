@@ -2,8 +2,7 @@
 
 namespace AbcPeople.BDO.Entities
 {
-    public class FamilySituation : BaseEntity
+    public class FamilySituation : ListItemBaseEntity
     {
-        public string Name { get; set; }
     }
 }

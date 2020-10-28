@@ -27,7 +27,7 @@ namespace AbcPeople.BDO.Entities
         //public int? FamilySituationId { get; set; }
         public FamilySituation FamilySituation { get; set; }
         public IEnumerable<EmployeeCompetency> EmployeeCompetency { get; set; }
-        //public int? MotherLanguageId { get; set; }
+        public int MotherLanguageId { get; set; }
         public Language MotherLanguage { get; set; }
         public List<WorkExperience> WorkExperiences { get; set; }
         public Address HomeAddress { get; set; }
@@ -36,5 +36,6 @@ namespace AbcPeople.BDO.Entities
         public List<EmployeeExam> EmployeeExams { get; set; }
         public ICollection<EmployeeCertificate> EmployeeCertificates { get; set; }
         public ICollection<EmployeeCourse> EmployeeCourses { get; set; }
+        public SocialNetwork SocialNetwork { get; set; }
     }
 }

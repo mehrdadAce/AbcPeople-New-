@@ -29,6 +29,8 @@
     <Compile Remove="Migrations\20201026123806_FixTypeErrorEnCourseEmployee.Designer.cs" />
     <Compile Remove="Migrations\20201028065654_MakingAllFieldsInEmployeeEntityNotNullable.cs" />
     <Compile Remove="Migrations\20201028065654_MakingAllFieldsInEmployeeEntityNotNullable.Designer.cs" />
+    <Compile Remove="Migrations\20201028090913_AddSocialNetworkEntity.cs" />
+    <Compile Remove="Migrations\20201028090913_AddSocialNetworkEntity.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

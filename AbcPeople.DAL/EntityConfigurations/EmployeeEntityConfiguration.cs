@@ -20,6 +20,7 @@ namespace AbcPeople.DAL.EntityConfigurations
             builder.HasOne(p => p.Nationality);
             builder.HasOne(p => p.Role);
             builder.HasOne(p => p.EmployeeTitle);
+            builder.HasOne(p => p.SocialNetwork);
 
             builder.HasMany(p => p.WorkExperiences);
             builder.HasMany(p => p.ProfileAdjustments);

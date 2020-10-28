@@ -2,8 +2,7 @@
 
 namespace AbcPeople.BDO.Entities
 {
-    public class Nationality : BaseEntity
+    public class Nationality : ListItemBaseEntity
     {
-        public string Name { get; set; }
     }
 }

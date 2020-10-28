@@ -87,15 +87,12 @@ namespace AbcPeople.Controllers
             return View("ProfileInfoEdit", profileInfoViewModel);
         }
 
-        private List<SelectListItem> InitializeSelectListItems(IEnumerable<BaseEntity> allEntities)
+        private List<SelectListItem> InitializeSelectListItems(IEnumerable<ListItemBaseEntity> allEntities)
         {
             var SelectListItems = new List<SelectListItem>();
             foreach (var baseEntity in allEntities)
             {
-                SelectListItems.Add(new SelectListItem { 
-                                    Value = baseEntity.Id.ToString(), 
-                                    Text = baseEntity.GetType().GetProperty("Name").GetValue(baseEntity, null).ToString()
-                }) ;
+                SelectListItems.Add(new SelectListItem { Value = baseEntity.Id.ToString(), Text = baseEntity.Name }) ;
             }
             return SelectListItems;
         }

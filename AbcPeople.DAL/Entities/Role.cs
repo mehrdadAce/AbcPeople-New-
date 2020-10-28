@@ -2,9 +2,8 @@
 
 namespace AbcPeople.DAL.Entities
 {
-    public class Role : BaseEntity
+    public class Role : ListItemBaseEntity
     {
-        public string Name { get; set; }
         public string Description { get; set; }
     }
 }

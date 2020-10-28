@@ -28,7 +28,7 @@ namespace AbcPeople.DAL.Entities
         public FamilySituation FamilySituation { get; set; }
         public IEnumerable<LanguageSkill> LanguageSkills { get; set; }
         public IEnumerable<EmployeeCompetency> EmployeeCompetencies { get; set; }
-        public int MotherLanguageId { get; set; }
+        //public int MotherLanguageId { get; set; }
         public Language MotherLanguage { get; set; }
         public virtual ICollection<WorkExperience> WorkExperiences { get; set; }
         public int HomeAddressId { get; set; }
@@ -38,5 +38,6 @@ namespace AbcPeople.DAL.Entities
         public virtual ICollection<EmployeeCertificate> EmployeeCertificates { get; set; }
         public virtual ICollection<EmployeeExam> EmployeeExams { get; set; }
         public virtual ICollection<EmployeeCourse> EmployeeCourses { get; set; }
+        public virtual SocialNetwork SocialNetwork { get; set; }
     }
 }

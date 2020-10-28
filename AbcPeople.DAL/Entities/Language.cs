@@ -2,9 +2,8 @@
 
 namespace AbcPeople.DAL.Entities
 {
-    public class Language : BaseEntity
+    public class Language : ListItemBaseEntity
     {
-        public string Name { get; set; }
         public string Acronym { get; set; }
     }
 }

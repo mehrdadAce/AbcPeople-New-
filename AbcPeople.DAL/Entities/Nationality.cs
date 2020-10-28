@@ -5,8 +5,7 @@ using System.Text;
 
 namespace AbcPeople.DAL.Entities
 {
-    public class Nationality : BaseEntity
+    public class Nationality : ListItemBaseEntity
     {
-        public string Name { get; set; }
     }
 }
