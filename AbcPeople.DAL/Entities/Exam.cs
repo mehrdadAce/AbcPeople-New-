@@ -4,9 +4,8 @@ using System.Collections.Generic;
 
 namespace AbcPeople.DAL.Entities
 {
-    public class Exam : BaseEntity
+    public class Exam : ListItemBaseEntity
     {
-        public string Title { get; set; }
         public string Description { get; set; }
         public virtual ICollection<EmployeeExam> EmployeeExams { get; set; }
         //public int CompanyId { get; set; }

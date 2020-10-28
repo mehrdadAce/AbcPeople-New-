@@ -4,9 +4,8 @@ using System.Collections.Generic;
 
 namespace AbcPeople.BDO.Entities
 {
-    public class Certificate : BaseEntity
+    public class Certificate : ListItemBaseEntity
     {
-        public string Title { get; set; }
         public string Description { get; set; }
         //public int CompanyId { get; set; }
         public virtual ICollection<EmployeeCertificate> EmployeeCertificates { get; set; }

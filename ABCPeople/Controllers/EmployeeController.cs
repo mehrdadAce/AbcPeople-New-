@@ -125,15 +125,10 @@ namespace AbcPeople.Controllers
         }
         public IActionResult ShowAddCertification()
         {
-            var certificates = new List<SelectListItem>();
-            foreach (var item in this.certificateService.GetAll())
-            {
-                certificates.Add(new SelectListItem() { Value = item.Id.ToString(), Text = item.Title });
-            }
             ProfileEducationAddCertificateViewModel vm = new ProfileEducationAddCertificateViewModel()
             {
                 Employee = GetCurrentEmployee(),
-                Certificates = certificates,
+                Certificates = InitializeSelectListItems(this.certificateService.GetAll()),
                 EmployeeCertificate = new EmployeeCertificate()
                 {
                     EmployeeId = GetCurrentEmployee().Id
@@ -150,20 +145,16 @@ namespace AbcPeople.Controllers
                 CertificateId = profileEducationAddCertificateViewModel.EmployeeCertificate.CertificateId,
                 Date = profileEducationAddCertificateViewModel.EmployeeCertificate.Date
             });
-            return View("ProfileEducations", GetCurrentEmployee());
+            //return View("ProfileEducations", GetCurrentEmployee());
+            return RedirectToAction("Acitenaam");
         }
 
         public IActionResult ShowAddEmployeeExamView()
         {
-            var exams = new List<SelectListItem>();
-            foreach (var item in this.examService.GetAll())
-            {
-                exams.Add(new SelectListItem() { Value = item.Id.ToString(), Text = item.Title });
-            }
             var vm = new ProfileEducationAddExamViewModel()
             {
                 EmployeeExam = new EmployeeExam(),
-                Exams = exams
+                Exams = InitializeSelectListItems(this.examService.GetAll())
             };
             return View("ProfileEducationAddExam", vm);
         }
