@@ -38,6 +38,7 @@ namespace AbcPeople.DAL.Entities
         public virtual ICollection<EmployeeCertificate> EmployeeCertificates { get; set; }
         public virtual ICollection<EmployeeExam> EmployeeExams { get; set; }
         public virtual ICollection<EmployeeCourse> EmployeeCourses { get; set; }
-        public virtual SocialNetwork SocialNetwork { get; set; }
+        public int SocialNetworkId { get; set; }
+        public SocialNetwork SocialNetwork { get; set; }
     }
 }

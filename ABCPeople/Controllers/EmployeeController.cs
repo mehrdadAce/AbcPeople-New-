@@ -62,6 +62,7 @@ namespace AbcPeople.Controllers
                                        .Include(y => y.Role)
                                        .Include(y => y.ProfileAdjustments)
                                        .Include(y => y.Nationality)
+                                       .Include(y => y.SocialNetwork)
                                        .Include(y => y.WorkExperiences).ThenInclude(x => x.Role)
                                        .Include(y => y.WorkExperiences).ThenInclude(x => x.PlaceOfWorkAddress)
                                        .Include(y => y.LanguageSkills)
@@ -105,6 +106,7 @@ namespace AbcPeople.Controllers
                                        .Include(y => y.MotherLanguage)
                                        .Include(y => y.FamilySituation)
                                        .Include(y => y.Nationality)
+                                       .Include(y => y.SocialNetwork)
                                        .Include(y => y.Role));
             return View("ProfileInfo", GetCurrentEmployee());
         }

@@ -36,6 +36,13 @@ namespace AbcPeople.BLL.Services
 
         protected override void UpdateProperties(Employee entity, DAL.Entities.Employee dalEntity)
         {
+            if (entity.SocialNetwork != null)
+            {
+                dalEntity.SocialNetwork.LinkedIn = entity.SocialNetwork.LinkedIn;
+                dalEntity.SocialNetwork.Twitter = entity.SocialNetwork.Twitter;
+                dalEntity.SocialNetwork.Blog = entity.SocialNetwork.Blog;
+            }
+            // ------------------------------------------------------------------- below to test!
             dalEntity.FirstName = entity.FirstName;
             dalEntity.LastName = entity.LastName;
             dalEntity.Email = entity.Email;
@@ -49,11 +56,11 @@ namespace AbcPeople.BLL.Services
 
             if (entity.HomeAddress != null)
             {
-                dalEntity.HomeAddress.StreetName = entity.HomeAddress.StreetName;
-                dalEntity.HomeAddress.HouseNumber = entity.HomeAddress.HouseNumber;
-                dalEntity.HomeAddress.CityId = entity.HomeAddress.CityId;
-                dalEntity.HomeAddress.Postalcode = entity.HomeAddress.Postalcode;
-                dalEntity.HomeAddress.CountryId = entity.HomeAddress.CountryId == 0 ?  1 : entity.HomeAddress.CountryId;
+                //dalEntity.HomeAddress.StreetName = entity.HomeAddress.StreetName;
+                //dalEntity.HomeAddress.HouseNumber = entity.HomeAddress.HouseNumber;
+                //dalEntity.HomeAddress.CityId = entity.HomeAddress.CityId;
+                //dalEntity.HomeAddress.Postalcode = entity.HomeAddress.Postalcode;
+                //dalEntity.HomeAddress.CountryId = entity.HomeAddress.CountryId == 0 ?  1 : entity.HomeAddress.CountryId;
             }
 
             //dalEntity.NationalityId = entity.NationalityId != null ? entity.NationalityId : dalEntity.NationalityId;
