@@ -5,8 +5,8 @@ namespace AbcPeople.BDO.Entities
 {
     public class EmployeeCourse : BaseEntity
     {
-        public int EmployeeId { get; set; }
-        public int CourseId { get; set; }
+        public int EmployeeId { get; set; } // todo : Weg
+        public int CourseId { get; set; } // todo : Weg
         public Course Course { get; set; }
         public DateTime Timestamp { get; set; }
     }

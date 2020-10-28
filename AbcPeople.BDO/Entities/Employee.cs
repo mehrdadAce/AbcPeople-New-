@@ -12,28 +12,27 @@ namespace AbcPeople.BDO.Entities
         public string Telephone { get; set; }
         public string PrivateEmail { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public char Gender { get; set; }
+        public char Gender { get; set; } // todo !
         public DateTime BeginDateOfWork { get; set; }
         public EmployeeTitle EmployeeTitle { get; set; }
         public string Coach { get; set; }
         //public Address PlaceOfWorkAddress { get; set; }
-        public int? RoleId { get; set; }
+        //public int? RoleId { get; set; }
         public Role Role { get; set; }
-        public int? NationalityId { get; set; }
+        //public int? NationalityId { get; set; } // todo : Fk niet meer nodig! verwijderen
         public Nationality Nationality { get; set; }
         public string ShortDescriptionNL { get; set; }
         public string ShortDescriptionEN { get; set; }
         public string Hobbys { get; set; }
-        public int? FamilySituationId { get; set; }
+        //public int? FamilySituationId { get; set; }
         public FamilySituation FamilySituation { get; set; }
         public IEnumerable<EmployeeCompetency> EmployeeCompetency { get; set; }
-        public int? MotherLanguageId { get; set; }
+        //public int? MotherLanguageId { get; set; }
         public Language MotherLanguage { get; set; }
         public List<WorkExperience> WorkExperiences { get; set; }
         public Address HomeAddress { get; set; }
-        public Address PlaceOfWorkAddress { get; set; }
         public List<ProfileAdjustment> ProfileAdjustments { get; set; }
-        public int? Gsm { get; set; }
+        public string Gsm { get; set; } // todo ! 
         public List<EmployeeExam> EmployeeExams { get; set; }
         public ICollection<EmployeeCertificate> EmployeeCertificates { get; set; }
         public ICollection<EmployeeCourse> EmployeeCourses { get; set; }

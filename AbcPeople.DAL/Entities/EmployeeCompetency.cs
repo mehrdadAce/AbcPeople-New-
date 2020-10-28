@@ -11,7 +11,7 @@ namespace AbcPeople.DAL.Entities
         public Employee Employee { get; set; }
 
         public int CompetencyId { get; set; }
-        public IEnumerable<Competency> Competency { get; set; }
+        public IEnumerable<Competency> Competency { get; set; } // todo : 1 competencie -> collection verwijderen
         public int KnowledgeLevelId { get; set; }
         public KnowledgeLevel Level { get; set; }
     }

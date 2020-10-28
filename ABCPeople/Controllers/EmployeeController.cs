@@ -1,4 +1,5 @@
 ﻿using AbcPeople.BDO.Entities;
+using AbcPeople.BDO.Entities.Base;
 using AbcPeople.BLL.Services;
 using AbcPeople.BLL.Services.Interfaces;
 using AbcPeople.ViewModels;
@@ -22,7 +23,8 @@ namespace AbcPeople.Controllers
         private readonly IEmployeeCertificateService employeeCertificateService;
         private readonly IExamService examService;
         private readonly IEmployeeExamService employeeExamService;
-        private Employee currentEmployee;
+        private readonly ICourseService courseService;
+        private readonly IEmployeeCourseService employeeCourseService;
 
         public EmployeeController(IEmployeeService employeeService, 
                                   IProfileAdjustmentService profileAdjustmentService,
@@ -33,7 +35,9 @@ namespace AbcPeople.Controllers
                                   ICertificateService certificateService,
                                   IEmployeeCertificateService employeeCertificateService,
                                   IExamService examService,
-                                  IEmployeeExamService employeeExamService)
+                                  IEmployeeExamService employeeExamService,
+                                  ICourseService courseService,
+                                  IEmployeeCourseService employeeCourseService)
         {
             this.employeeService = employeeService;
             this.profileAdjustmentService = profileAdjustmentService;
@@ -45,20 +49,21 @@ namespace AbcPeople.Controllers
             this.employeeCertificateService = employeeCertificateService;
             this.examService = examService;
             this.employeeExamService = employeeExamService;
-            RefreshEmployee();
+            this.courseService = courseService;
+            this.employeeCourseService = employeeCourseService;
         }
 
-        private void RefreshEmployee()
+        private Employee GetCurrentEmployee()
         {
-            this.currentEmployee = this.employeeService.Get(4,
-                                 x => x.Include(y => y.HomeAddress)
-                                       .Include(y => y.PlaceOfWorkAddress)
+            return this.employeeService.Get(4,
+                                 x => x.Include(y => y.HomeAddress).ThenInclude(x => x.City)
                                        .Include(y => y.MotherLanguage)
                                        .Include(y => y.FamilySituation)
                                        .Include(y => y.Role)
                                        .Include(y => y.ProfileAdjustments)
                                        .Include(y => y.Nationality)
                                        .Include(y => y.WorkExperiences).ThenInclude(x => x.Role)
+                                       .Include(y => y.WorkExperiences).ThenInclude(x => x.PlaceOfWorkAddress)
                                        .Include(y => y.LanguageSkills)
                                        .Include(y => y.EmployeeCertificates).ThenInclude(x => x.Certificate)
                                        .Include(y => y.EmployeeExams).ThenInclude(x => x.Exam));
@@ -66,50 +71,33 @@ namespace AbcPeople.Controllers
 
         public IActionResult ProfileInfo()
         {
-            return View(this.currentEmployee);
+            return View(GetCurrentEmployee());
         }
 
         public IActionResult ProfileInfoEdit()
         {
-            var languageSelectListItem = new List<SelectListItem>();
-            foreach (Language language in this.languageService.GetAll())
-            {
-                languageSelectListItem.Add(new SelectListItem { Value = language.Id.ToString(), Text = language.Name });
-            }
-
-            var nationalitySelectListItem = new List<SelectListItem>();
-            foreach (Nationality nationality in this.nationalityService.GetAll())
-            {
-                nationalitySelectListItem.Add(new SelectListItem { Value = nationality.Id.ToString(), Text = nationality.Name });
-            }
-
-            var roleSelectListItem = new List<SelectListItem>();
-            foreach (Role role in this.roleService.GetAll())
-            {
-                roleSelectListItem.Add(new SelectListItem { Value = role.Id.ToString(), Text = role.Name });
-            }
-
-            var familySituationSelectListItem = new List<SelectListItem>();
-            foreach (FamilySituation familySituation in this.familySituationService.GetAll())
-            {
-                familySituationSelectListItem.Add(new SelectListItem { Value = familySituation.Id.ToString(), Text = familySituation.Name });
-            }
-
             ProfileInfoViewModel profileInfoViewModel = new ProfileInfoViewModel()
             {
-                Employee = this.employeeService.Get(4, 
-                                 x => x.Include(y => y.HomeAddress)
-                                       .Include(y => y.PlaceOfWorkAddress)
-                                       .Include(y => y.MotherLanguage)
-                                       .Include(y => y.FamilySituation)
-                                       .Include(y => y.Role)
-                                       .Include(y => y.Nationality)),
-                Languages = languageSelectListItem,
-                Nationalities = nationalitySelectListItem,
-                Roles = roleSelectListItem,
-                FamilySituations = familySituationSelectListItem
+                Employee = GetCurrentEmployee(),
+                Languages = InitializeSelectListItems(this.languageService.GetAll()),
+                Nationalities = InitializeSelectListItems(this.nationalityService.GetAll()),
+                Roles = InitializeSelectListItems(this.roleService.GetAll()),
+                FamilySituations = InitializeSelectListItems(this.familySituationService.GetAll())
             };
             return View("ProfileInfoEdit", profileInfoViewModel);
+        }
+
+        private List<SelectListItem> InitializeSelectListItems(IEnumerable<BaseEntity> allEntities)
+        {
+            var SelectListItems = new List<SelectListItem>();
+            foreach (var baseEntity in allEntities)
+            {
+                SelectListItems.Add(new SelectListItem { 
+                                    Value = baseEntity.Id.ToString(), 
+                                    Text = baseEntity.GetType().GetProperty("Name").GetValue(baseEntity, null).ToString()
+                }) ;
+            }
+            return SelectListItems;
         }
 
         [HttpPost]
@@ -117,16 +105,15 @@ namespace AbcPeople.Controllers
         {
             this.employeeService.Update(profileInfoViewModel.Employee, 
                                  x => x.Include(y => y.HomeAddress)
-                                       .Include(y => y.PlaceOfWorkAddress)
                                        .Include(y => y.MotherLanguage)
                                        .Include(y => y.FamilySituation)
                                        .Include(y => y.Nationality)
                                        .Include(y => y.Role));
-            return View("ProfileInfo", this.currentEmployee);
+            return View("ProfileInfo", GetCurrentEmployee());
         }
         public IActionResult ProfileWorkExperiences()
         {
-            return View(this.currentEmployee.WorkExperiences);
+            return View(GetCurrentEmployee().WorkExperiences);
         }
         public IActionResult AddNewWorkExperience()
         {
@@ -146,11 +133,11 @@ namespace AbcPeople.Controllers
             }
             ProfileEducationAddCertificateViewModel vm = new ProfileEducationAddCertificateViewModel()
             {
-                Employee = this.currentEmployee,
+                Employee = GetCurrentEmployee(),
                 Certificates = certificates,
                 EmployeeCertificate = new EmployeeCertificate()
                 {
-                    EmployeeId = this.currentEmployee.Id
+                    EmployeeId = GetCurrentEmployee().Id
                 }
             };
             return View("ProfileEducationAddCertificate", vm);
@@ -164,8 +151,7 @@ namespace AbcPeople.Controllers
                 CertificateId = profileEducationAddCertificateViewModel.EmployeeCertificate.CertificateId,
                 Date = profileEducationAddCertificateViewModel.EmployeeCertificate.Date
             });
-            RefreshEmployee();
-            return View("ProfileEducations", this.currentEmployee);
+            return View("ProfileEducations", GetCurrentEmployee());
         }
 
         public IActionResult ShowAddEmployeeExamView()
@@ -187,17 +173,28 @@ namespace AbcPeople.Controllers
         {
             this.employeeExamService.Create(new EmployeeExam()
             {
-                EmployeeId = this.currentEmployee.Id,
+                EmployeeId = GetCurrentEmployee().Id,
                 ExamId = profileEducationAddExamViewModel.EmployeeExam.ExamId,
                 Date = profileEducationAddExamViewModel.EmployeeExam.Date
             });
-            RefreshEmployee();
-            return View("ProfileEducations", this.currentEmployee);
+            return View("ProfileEducations", GetCurrentEmployee());
         }
 
-        public IActionResult AddCourse()
+        public IActionResult ShowAddCourseView()
         {
+            var courses = new List<SelectListItem>();
+            foreach (var item in this.courseService.GetAll())
+            {
+
+            }
+            var vm = new ProfileEducationAddCourseViewModel();
             return View("ProfileEducationAddCourse");
+        }
+
+        public IActionResult SaveEmployeeCourse()
+        {
+            // save data
+            return View("ProfileEducations", GetCurrentEmployee());
         }
 
         public IActionResult AddEducation()
@@ -212,7 +209,7 @@ namespace AbcPeople.Controllers
 
         public IActionResult ProfileEducations()
         {
-            return View(this.currentEmployee);
+            return View(GetCurrentEmployee());
         }
        
         public IActionResult ProfileCompetencies()

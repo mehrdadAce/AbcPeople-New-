@@ -12,6 +12,7 @@ namespace AbcPeople.BDO.Entities
         public string ProjectDescriptionEn { get; set; }
         public string ProjectDescriptionNl { get; set; }
         public Role Role { get; set; }
+        public Address PlaceOfWorkAddress { get; set; }
 
     }
 }

@@ -13,8 +13,7 @@ namespace AbcPeople.DAL.EntityConfigurations
             builder.Property(p => p.StartDate).IsRequired();
             builder.Property(p => p.CompanyName).IsRequired();
 
-            // builder.HasOne(p => p.Employee).WithMany().HasForeignKey(p => p.EmployeeId); // relaties in 2 richrtingen definieren! => ook in EmployeeConfigurations
-            
+            builder.HasOne(p => p.PlaceOfWorkAddress);
         }
     }
 }

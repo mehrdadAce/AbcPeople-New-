@@ -4,14 +4,16 @@ using AbcPeople.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AbcPeople.DAL.Migrations
 {
     [DbContext(typeof(AbcPeopleEntities))]
-    partial class AbcPeopleEntitiesModelSnapshot : ModelSnapshot
+    [Migration("20201028064750_MakingPlaceOfWorkExperienceNotNullable")]
+    partial class MakingPlaceOfWorkExperienceNotNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -226,8 +228,8 @@ namespace AbcPeople.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(1)");
 
-                    b.Property<string>("Gsm")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("Gsm")
+                        .HasColumnType("int");
 
                     b.Property<string>("Hobbys")
                         .HasColumnType("nvarchar(max)");

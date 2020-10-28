@@ -24,7 +24,7 @@
 
                         <label class="col-lg-3 text-right"> </label>
                         <input class="col-lg-2 form-control" asp-for="Employee.HomeAddress.Postalcode"/>
-                        <input class="col-lg-6 form-control" asp-for="Employee.HomeAddress.City"/>
+                        <input class="col-lg-6 form-control" asp-for="Employee.HomeAddress.City.Name"/>
 
                         <label class="col-lg-3 text-right" asp-for="Employee.PrivateEmail">Email</label>
                         <input class="col-lg-8 form-control" asp-for="Employee.PrivateEmail"/>
@@ -35,13 +35,13 @@
                         <label class="col-lg-3 text-right" asp-for="Employee.Gsm">GSM</label>
                         <input class="col-lg-8 form-control" asp-for="Employee.Gsm" placeholder="bv. 0456/78.90.12" />
 
-                        <label class="col-lg-3 text-right" asp-for="Employee.PlaceOfWorkAddress.StreetName">Werkadres (straat + nr.)</label>
-                        <input class="col-lg-6 form-control" asp-for="Employee.PlaceOfWorkAddress.StreetName" />
-                        <input class="col-lg-2 form-control" asp-for="Employee.PlaceOfWorkAddress.HouseNumber" />
+                        <label class="col-lg-3 text-right">Werkadres (straat + nr.)</label>
+                        <input class="col-lg-6 form-control" asp-for="Employee.WorkExperiences.FirstOrDefault(x=>x.EndDate==null).PlaceOfWorkAddress.StreetName" />
+                        <input class="col-lg-2 form-control" asp-for="Employee.WorkExperiences.FirstOrDefault(x=>x.EndDate==null).PlaceOfWorkAddress.HouseNumber" />
 
                         <label class="col-lg-3 text-right"> </label>
-                        <input class="col-lg-2 form-control" asp-for="Employee.PlaceOfWorkAddress.Postalcode" placeholder="postcode" />
-                        <input class="col-lg-6 form-control" asp-for="Employee.PlaceOfWorkAddress.City" placeholder="stad" />
+                        <input class="col-lg-2 form-control" asp-for="Employee.WorkExperiences.FirstOrDefault(x=>x.EndDate==null).PlaceOfWorkAddress.Postalcode" placeholder="postcode" />
+                        <input class="col-lg-6 form-control" asp-for="Employee.WorkExperiences.FirstOrDefault(x=>x.EndDate==null).PlaceOfWorkAddress.City.Name" placeholder="stad" />
 
                         <label class="col-lg-3 text-right" asp-for="Employee.Email">Email(werk)</label>
                         <input class="col-lg-8 form-control" asp-for="Employee.Email" />
@@ -76,13 +76,13 @@
                         </select>
 
                         <label class="col-lg-5 text-right my-1" asp-for="Employee.FamilySituation">Gezinssituatie</label>
-                        <select class="col-lg-7 form-control my-1" asp-for="Employee.FamilySituationId" asp-items="@Model.FamilySituations"></select>
+                        <select class="col-lg-7 form-control my-1" asp-for="Employee.FamilySituation.Id" asp-items="@Model.FamilySituations"></select>
 
                         <label class="col-lg-5 text-right my-1" asp-for="Employee.MotherLanguage">Moedertaal</label>
-                        <select class="col-lg-7 form-control my-1" asp-for="Employee.MotherLanguageId" asp-items="@Model.Languages"></select>
+                        <select class="col-lg-7 form-control my-1" asp-for="Employee.MotherLanguage.Id" asp-items="@Model.Languages"></select>
 
                         <label class="col-lg-5 text-right my-1" for="motherlanguage">Nationaliteit</label>
-                        <select class="col-lg-7 form-control my-1" asp-for="Employee.NationalityId" asp-items="@Model.Nationalities"></select>
+                        <select class="col-lg-7 form-control my-1" asp-for="Employee.Nationality.Id" asp-items="@Model.Nationalities"></select>
 
                         <label class="col-lg-5 text-right my-1" for="drivinglicence">Rijbewijs ????</label>
                         <textarea id="w3review" name="w3review" rows="4" cols="50" class="col-lg-7 form-control my-1">At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.
@@ -103,7 +103,7 @@
                         </select>
 
                         <label class="col-lg-5 text-right" for="company">Functie</label>
-                        <select class="col-lg-7 form-control my-1" asp-for="Employee.RoleId" asp-items="@Model.Roles"></select>
+                        <select class="col-lg-7 form-control my-1" asp-for="Employee.Role.Id" asp-items="@Model.Roles"></select>
 
                         <label class="col-lg-5 text-right" for="company">Domein</label>
                         <select class="col-lg-7 form-control my-1">
@@ -156,7 +156,6 @@
                         </div>
                         <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username">
                     </div>
-
 
                     <div class="card">
                         <div class="card-header">
@@ -213,7 +212,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
                     <div class="card mt-3">
@@ -252,7 +250,6 @@
                                 <textarea name="w3review" style="width: 100%; height: 400px; resize: none;">@Model.Employee.Hobbys
                                 </textarea>
                             </div>
-
                         </div>
                     </div>
                 </div>

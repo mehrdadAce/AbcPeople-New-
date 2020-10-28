@@ -6,6 +6,6 @@ namespace AbcPeople.ViewModels
     public class HomepageViewModel
     {
         public IEnumerable<Employee> Employees { get; set; }
-        public IEnumerable<ProfileAdjustment> ProfileAdjustments { get; set; }
+        public IEnumerable<ProfileAdjustment> LastProfileAdjustments { get; set; }
     }
 }

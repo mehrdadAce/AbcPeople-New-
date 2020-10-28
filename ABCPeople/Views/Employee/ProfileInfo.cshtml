@@ -40,7 +40,7 @@
                             <p>Coach <a href="#">Sander Van Looveren ? </a></p>
                             <p><i class="fas fa-envelope"></i> <a href="#">@Model.Email</a></p>
                             <p><i class="fas fa-phone-square-alt"></i> @Model.Telephone</p>
-                            <p><i class="fas fa-home"></i> @Model.HomeAddress.StreetName @Model.HomeAddress.HouseNumber, @Model.HomeAddress.Postalcode @Model.HomeAddress.City </p>
+                            <p><i class="fas fa-home"></i> @Model.HomeAddress.StreetName @Model.HomeAddress.HouseNumber, @Model.HomeAddress.Postalcode @Model.HomeAddress.City.Name </p>
                         </div>
                     </div>
 
@@ -48,7 +48,7 @@
                         <tbody>
                             <tr>
                                 <th class="p-1 pl-1" scope="row">Werkadres</th>
-                                <td class="p-1 pl-1">@Model.PlaceOfWorkAddress.StreetName @Model.PlaceOfWorkAddress.HouseNumber, @Model.PlaceOfWorkAddress.City @Model.PlaceOfWorkAddress.Postalcode </td>
+                                <td class="p-1 pl-1">@Model.WorkExperiences.FirstOrDefault(x => x.EndDate == null).PlaceOfWorkAddress.StreetName @Model.WorkExperiences.FirstOrDefault(x => x.EndDate == null).PlaceOfWorkAddress.HouseNumber, @Model.WorkExperiences.FirstOrDefault(x => x.EndDate == null).PlaceOfWorkAddress.City.Name @Model.WorkExperiences.FirstOrDefault(x => x.EndDate == null).PlaceOfWorkAddress.Postalcode </td>
                             </tr>
                             <tr>
                                 <th class="p-1 pl-1" scope="row">Email privé</th>

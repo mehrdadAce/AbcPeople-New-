@@ -7,5 +7,6 @@ namespace AbcPeople.BDO.Entities
     {
         public DateTime Timestamp { get; set; }
         public int EmployeeId { get; set; }
+        public Employee Employee { get; set; }
     }
 }

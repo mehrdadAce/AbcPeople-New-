@@ -4,14 +4,16 @@ using AbcPeople.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AbcPeople.DAL.Migrations
 {
     [DbContext(typeof(AbcPeopleEntities))]
-    partial class AbcPeopleEntitiesModelSnapshot : ModelSnapshot
+    [Migration("20201028063720_RemovePlaceOfWorkFromEmployeeAndAddToWorkExperience")]
+    partial class RemovePlaceOfWorkFromEmployeeAndAddToWorkExperience
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -226,8 +228,8 @@ namespace AbcPeople.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(1)");
 
-                    b.Property<string>("Gsm")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("Gsm")
+                        .HasColumnType("int");
 
                     b.Property<string>("Hobbys")
                         .HasColumnType("nvarchar(max)");
@@ -708,7 +710,7 @@ namespace AbcPeople.DAL.Migrations
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("PlaceOfWorkAddressId")
+                    b.Property<int?>("PlaceOfWorkAddressId")
                         .HasColumnType("int");
 
                     b.Property<string>("ProjectDescriptionEn")
@@ -885,9 +887,7 @@ namespace AbcPeople.DAL.Migrations
 
                     b.HasOne("AbcPeople.DAL.Entities.Address", "PlaceOfWorkAddress")
                         .WithMany()
-                        .HasForeignKey("PlaceOfWorkAddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PlaceOfWorkAddressId");
 
                     b.HasOne("AbcPeople.DAL.Entities.Role", "Role")
                         .WithMany()

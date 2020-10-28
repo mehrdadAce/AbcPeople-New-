@@ -14,7 +14,7 @@ namespace AbcPeople.DAL.EntityConfigurations
             builder.Property(p => p.LastName).HasMaxLength(100);
 
             builder.HasOne(p => p.HomeAddress);
-            builder.HasOne(p => p.PlaceOfWorkAddress);
+            
             builder.HasOne(p => p.MotherLanguage);
             builder.HasOne(p => p.FamilySituation);
             builder.HasOne(p => p.Nationality);

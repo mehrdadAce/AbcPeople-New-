@@ -37,15 +37,11 @@ namespace ABCPeople.Web.Controllers
 
         public IActionResult Index()
         {
-            var employee1 = this.employeeService.Get(1, 
-                x => x.Include(y => y.WorkExperiences).Include(y => y.HomeAddress)                                       
-            );
-
             HomepageViewModel homepageViewModel = new HomepageViewModel()
             {
-                Employees = this.employeeService.GetEmployeesBornedThisMonth(),
-                ProfileAdjustments = this.profileAdjustmentService.GetAll()
-            };
+                Employees = this.employeeService.GetUpcomingBirthdays(),
+                LastProfileAdjustments = this.profileAdjustmentService.GetLastProfileAdjustments(x => x.Include(y => y.Employee))
+            };    
 
             return View(homepageViewModel);
         }

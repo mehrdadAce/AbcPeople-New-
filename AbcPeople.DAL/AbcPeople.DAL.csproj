@@ -27,6 +27,8 @@
     <Compile Remove="Migrations\20201026075802_AddRelashionshipBetweenCityEntityAndAddressEntity.Designer.cs" />
     <Compile Remove="Migrations\20201026123806_FixTypeErrorEnCourseEmployee.cs" />
     <Compile Remove="Migrations\20201026123806_FixTypeErrorEnCourseEmployee.Designer.cs" />
+    <Compile Remove="Migrations\20201028065654_MakingAllFieldsInEmployeeEntityNotNullable.cs" />
+    <Compile Remove="Migrations\20201028065654_MakingAllFieldsInEmployeeEntityNotNullable.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
