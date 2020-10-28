@@ -33,6 +33,14 @@
     <Compile Remove="Migrations\20201028090913_AddSocialNetworkEntity.Designer.cs" />
     <Compile Remove="Migrations\20201028111255_RemoveLazyLoadingForSocialNetworkOnEmployeeEntity.cs" />
     <Compile Remove="Migrations\20201028111255_RemoveLazyLoadingForSocialNetworkOnEmployeeEntity.Designer.cs" />
+    <Compile Remove="Migrations\20201028123103_AddMotherLanguageIdToEmployeeEntity.cs" />
+    <Compile Remove="Migrations\20201028123103_AddMotherLanguageIdToEmployeeEntity.Designer.cs" />
+    <Compile Remove="Migrations\20201028123810_AddMotherLanguageIdToEmployeeEntity.cs" />
+    <Compile Remove="Migrations\20201028123810_AddMotherLanguageIdToEmployeeEntity.Designer.cs" />
+    <Compile Remove="Migrations\20201028124159_AddMotherLanguageIdToEmployeeEntity.cs" />
+    <Compile Remove="Migrations\20201028124159_AddMotherLanguageIdToEmployeeEntity.Designer.cs" />
+    <Compile Remove="Migrations\20201028125957_AddMotherLanguageIdToEmployeeEntity.cs" />
+    <Compile Remove="Migrations\20201028125957_AddMotherLanguageIdToEmployeeEntity.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

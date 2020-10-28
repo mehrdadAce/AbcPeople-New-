@@ -4,10 +4,7 @@ using Microsoft.Extensions.Logging;
 using ABCPeople.Web.Models;
 using AbcPeople.BLL.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using AbcPeople.ViewModels;
-using AbcPeople.BDO.Entities;
 
 namespace ABCPeople.Web.Controllers
 {
