@@ -115,10 +115,23 @@ namespace AbcPeople.Controllers
         {
             return View(GetCurrentEmployee().WorkExperiences);
         }
+        public IActionResult EditWorkExperience(int workExperienceId)
+        {
+            // todo : saving Edited work Experience using a viewmodel
+            // todo : passing data from View to action in controller (Html.ActionLink)
+            ProfileWorkExperienceEditViewModel profileWorkExperienceEditViewModel = new ProfileWorkExperienceEditViewModel() 
+            { 
+
+            };
+
+            return View("ProfileWorkExperienceEdit");
+        }
+        
         public IActionResult AddNewWorkExperience()
         {
-            return View("ProfileNewWorkExperience");
+            return View("ProfileWorkExperienceNew");
         }
+
         public IActionResult AddLanguageSkills()
         {
             //saven
