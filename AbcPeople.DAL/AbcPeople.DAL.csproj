@@ -41,6 +41,8 @@
     <Compile Remove="Migrations\20201028124159_AddMotherLanguageIdToEmployeeEntity.Designer.cs" />
     <Compile Remove="Migrations\20201028125957_AddMotherLanguageIdToEmployeeEntity.cs" />
     <Compile Remove="Migrations\20201028125957_AddMotherLanguageIdToEmployeeEntity.Designer.cs" />
+    <Compile Remove="Migrations\20201029083321_AddEmployeeEducationEntity.cs" />
+    <Compile Remove="Migrations\20201029083321_AddEmployeeEducationEntity.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

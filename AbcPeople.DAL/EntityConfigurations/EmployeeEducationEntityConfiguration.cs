@@ -10,7 +10,8 @@ namespace AbcPeople.DAL.EntityConfigurations
         {
             base.Configure(builder);
 
+            builder.Property(p => p.EducationId).IsRequired();
+            builder.Property(p => p.EmployeeId).IsRequired();
         }
     }
-
 }

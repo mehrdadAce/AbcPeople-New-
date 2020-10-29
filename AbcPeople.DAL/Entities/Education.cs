@@ -9,5 +9,6 @@ namespace AbcPeople.DAL.Entities
     {
         public string Institution { get; set; }
         public int CityId { get; set; }
+        public virtual ICollection<EmployeeEducation> EmployeeEducations { get; set; }
     }
 }

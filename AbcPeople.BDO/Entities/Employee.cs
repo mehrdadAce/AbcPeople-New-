@@ -36,6 +36,7 @@ namespace AbcPeople.BDO.Entities
         public List<EmployeeExam> EmployeeExams { get; set; }
         public ICollection<EmployeeCertificate> EmployeeCertificates { get; set; }
         public ICollection<EmployeeCourse> EmployeeCourses { get; set; }
+        public ICollection<EmployeeEducation> EmployeeEducations { get; set; }
         public SocialNetwork SocialNetwork { get; set; }
     }
 }

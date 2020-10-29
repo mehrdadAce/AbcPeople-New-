@@ -1,4 +1,5 @@
 ﻿using AbcPeople.BDO.Entities.Base;
+using System.Collections.Generic;
 
 namespace AbcPeople.BDO.Entities
 {
@@ -6,5 +7,6 @@ namespace AbcPeople.BDO.Entities
     {
         public string Institution { get; set; }
         public int CityId { get; set; }
+        public List<EmployeeEducation> EmployeeEducations { get; set; }
     }
 }

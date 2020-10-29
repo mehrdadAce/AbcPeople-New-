@@ -67,7 +67,8 @@ namespace AbcPeople.Controllers
                                        .Include(y => y.WorkExperiences).ThenInclude(x => x.PlaceOfWorkAddress)
                                        .Include(y => y.LanguageSkills)
                                        .Include(y => y.EmployeeCertificates).ThenInclude(x => x.Certificate)
-                                       .Include(y => y.EmployeeExams).ThenInclude(x => x.Exam));
+                                       .Include(y => y.EmployeeExams).ThenInclude(x => x.Exam)
+                                       .Include(y => y.EmployeeEducations).ThenInclude(x => x.Education));
         }
 
         public IActionResult ProfileInfo()

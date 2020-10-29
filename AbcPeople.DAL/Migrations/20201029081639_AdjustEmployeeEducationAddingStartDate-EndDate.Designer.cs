@@ -4,14 +4,16 @@ using AbcPeople.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AbcPeople.DAL.Migrations
 {
     [DbContext(typeof(AbcPeopleEntities))]
-    partial class AbcPeopleEntitiesModelSnapshot : ModelSnapshot
+    [Migration("20201029081639_AdjustEmployeeEducationAddingStartDate-EndDate")]
+    partial class AdjustEmployeeEducationAddingStartDateEndDate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -429,10 +431,6 @@ namespace AbcPeople.DAL.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("EducationId");
-
-                    b.HasIndex("EmployeeId");
 
                     b.ToTable("EmployeeEducations");
                 });
@@ -912,21 +910,6 @@ namespace AbcPeople.DAL.Migrations
 
                     b.HasOne("AbcPeople.DAL.Entities.Employee", null)
                         .WithMany("EmployeeCourses")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("AbcPeople.DAL.Entities.EmployeeEducation", b =>
-                {
-                    b.HasOne("AbcPeople.DAL.Entities.Education", null)
-                        .WithMany("EmployeeEducations")
-                        .HasForeignKey("EducationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("AbcPeople.DAL.Entities.Employee", null)
-                        .WithMany("EmployeeEducations")
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
