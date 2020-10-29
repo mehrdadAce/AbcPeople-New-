@@ -30,6 +30,7 @@ namespace AbcPeople.DAL
         public DbSet<Exam> Exams { get; set; }
         public DbSet<EmployeeCourse> EmployeeCourses { get; set; }
         public DbSet<SocialNetwork> SocialNetworks { get; set; }
+        public DbSet<Education> Educations { get; set; }
 
         public AbcPeopleEntities(DbContextOptions options) : base(options)
         {
@@ -62,6 +63,7 @@ namespace AbcPeople.DAL
             modelBuilder.ApplyConfiguration(new ExamEntityConfiguration()); 
             modelBuilder.ApplyConfiguration(new EmployeeCourseEntityConfiguration()); 
             modelBuilder.ApplyConfiguration(new SocialNetworkEntityConfiguration()); 
+            modelBuilder.ApplyConfiguration(new EducationEntityConfiguration()); 
         }
     }
 }

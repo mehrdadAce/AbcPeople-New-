@@ -146,7 +146,7 @@ namespace AbcPeople.Controllers
                 Date = profileEducationAddCertificateViewModel.EmployeeCertificate.Date
             });
             //return View("ProfileEducations", GetCurrentEmployee());
-            return RedirectToAction("Acitenaam");
+            return RedirectToAction("ProfileEducations");
         }
 
         public IActionResult ShowAddEmployeeExamView()
@@ -167,7 +167,7 @@ namespace AbcPeople.Controllers
                 ExamId = profileEducationAddExamViewModel.EmployeeExam.ExamId,
                 Date = profileEducationAddExamViewModel.EmployeeExam.Date
             });
-            return View("ProfileEducations", GetCurrentEmployee());
+            return RedirectToAction("ProfileEducations");
         }
 
         public IActionResult ShowAddCourseView()
@@ -184,7 +184,7 @@ namespace AbcPeople.Controllers
         public IActionResult SaveEmployeeCourse()
         {
             // save data
-            return View("ProfileEducations", GetCurrentEmployee());
+            return RedirectToAction("ProfileEducations");
         }
 
         public IActionResult AddEducation()
