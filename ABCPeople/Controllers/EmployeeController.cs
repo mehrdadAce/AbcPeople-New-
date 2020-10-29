@@ -64,7 +64,7 @@ namespace AbcPeople.Controllers
                                        .Include(y => y.Nationality)
                                        .Include(y => y.SocialNetwork)
                                        .Include(y => y.WorkExperiences).ThenInclude(x => x.Role)
-                                       .Include(y => y.WorkExperiences).ThenInclude(x => x.PlaceOfWorkAddress)
+                                       .Include(y => y.WorkExperiences).ThenInclude(x => x.PlaceOfWorkAddress).ThenInclude(x => x.City)
                                        .Include(y => y.LanguageSkills)
                                        .Include(y => y.EmployeeCertificates).ThenInclude(x => x.Certificate)
                                        .Include(y => y.EmployeeExams).ThenInclude(x => x.Exam)

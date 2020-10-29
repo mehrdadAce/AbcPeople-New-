@@ -26,56 +26,86 @@
         </a>
     </div>
     @{
-        int counter = 1;
+        int counter1 = 0;
+        int counter2 = 1;
         foreach (var workExperience in Model)
         {
-            <ul class="nav nav-tabs ">
-                <li class="nav-item active">
-                    <a class="nav-link active" href="#1nl" data-toggle="tab">NL</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#2en" data-toggle="tab">EN</a>
-                </li>
-            </ul>
-            <div class="float-lg-right mt-2">
-                <button type="button" class="rounded"><i class="fas fa-edit"></i> Bewerken</button>
-                <button type="button" class="rounded"><i class="fas fa-trash-alt"></i> Verwijderen</button>
-            </div>
+            <div class="container">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item active">
+                        <a class="nav-link active" href="@(true?"#menu"+counter1:"")" data-toggle="tab">NL</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="@(true?"#menu"+counter2:"")" data-toggle="tab">EN</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div id="@(true ? $"menu{counter1}":"")" class="tab-pane active">
+                        <div class="container">
+                            <p>Van @workExperience.StartDate.ToString("dd/MM/yyyy") tot @(workExperience.EndDate != null ? workExperience.EndDate?.ToString("dd/MM/yyyy") : "Heden")</p>
+                            <p class="float-right">@workExperience.CompanyName</p>
+                            <br />
+                            <p class="float-right">Overheid en publieke sector !!!!</p>
 
-            <div class="tab-content clearfix">
-                <div class="tab-pane active" id="1nl">
-                    <p>Van @workExperience.StartDate tot @workExperience.EndDate</p>
-                    <p class="float-right">@workExperience.CompanyName</p>
-                    <br />
-                    <p class="float-right">Overheid en publieke sector !!!!</p>
+                            <table class="table table-striped table-condensed">
+                                <tr>
+                                    <td>Project</td>
+                                    <td>@workExperience.ProjectName</td>
+                                </tr>
+                                <tr>
+                                    <td>Externe rol</td>
+                                    <td>@workExperience.Role.Name</td>
+                                </tr>
+                                <tr>
+                                    <td>Omschrijving</td>
+                                    <td style="overflow: hidden !important;">
+                                        @workExperience.ProjectDescriptionNl
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Competenties</td>
+                                    <td>
+                                        todo !!!
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="@(true ? $"menu{counter2}":"")" class="tab-pane">
+                        <div class="container">
+                            <p>Van @workExperience.StartDate.ToString("dd/MM/yyyy") till @(workExperience.EndDate != null ? workExperience.EndDate?.ToString("dd/MM/yyyy") : "Now")</p>
+                            <p class="float-right">@workExperience.CompanyName</p>
+                            <br />
+                            <p class="float-right">Overheid en publieke sector !!!!</p>
 
-                    <table class="table table-striped table-condensed">
-                        <tr>
-                            <td>Project</td>
-                            <td>@workExperience.ProjectName</td>
-                        </tr>
-                        <tr>
-                            <td>Externe rol</td>
-                            <td>@workExperience.Role.Name</td>
-                        </tr>
-                        <tr>
-                            <td>Omschrijving</td>
-                            <td style="overflow: hidden !important;">
-                                @workExperience.ProjectDescriptionNl
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Competenties</td>
-                            <td>
-                                todo !!!
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="tab-pane" id="2en">
+                            <table class="table table-striped table-condensed">
+                                <tr>
+                                    <td>Project</td>
+                                    <td>@workExperience.ProjectName</td>
+                                </tr>
+                                <tr>
+                                    <td>Externe rol</td>
+                                    <td>@workExperience.Role.Name</td>
+                                </tr>
+                                <tr>
+                                    <td>Omschrijving</td>
+                                    <td style="overflow: hidden !important;">
+                                        @workExperience.ProjectDescriptionEn
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Competenties</td>
+                                    <td>
+                                        todo !!!
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
-            counter++;
+            counter1--;
+            counter2++;
         }
     }
 </div>
