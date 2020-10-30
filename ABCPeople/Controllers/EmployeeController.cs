@@ -1,6 +1,5 @@
 ﻿using AbcPeople.BDO.Entities;
 using AbcPeople.BDO.Entities.Base;
-using AbcPeople.BLL.Services;
 using AbcPeople.BLL.Services.Interfaces;
 using AbcPeople.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -68,7 +67,8 @@ namespace AbcPeople.Controllers
                                        .Include(y => y.LanguageSkills)
                                        .Include(y => y.EmployeeCertificates).ThenInclude(x => x.Certificate)
                                        .Include(y => y.EmployeeExams).ThenInclude(x => x.Exam)
-                                       .Include(y => y.EmployeeEducations).ThenInclude(x => x.Education));
+                                       .Include(y => y.EmployeeEducations).ThenInclude(x => x.Education)
+                                       .Include(y => y.EmployeeCourses).ThenInclude(x => x.Course));
         }
 
         public IActionResult ProfileInfo()
@@ -87,17 +87,7 @@ namespace AbcPeople.Controllers
                 FamilySituations = InitializeSelectListItems(this.familySituationService.GetAll())
             };
             return View("ProfileInfoEdit", profileInfoViewModel);
-        }
-
-        private List<SelectListItem> InitializeSelectListItems(IEnumerable<ListItemBaseEntity> allEntities)
-        {
-            var SelectListItems = new List<SelectListItem>();
-            foreach (var baseEntity in allEntities)
-            {
-                SelectListItems.Add(new SelectListItem { Value = baseEntity.Id.ToString(), Text = baseEntity.Name }) ;
-            }
-            return SelectListItems;
-        }
+        }     
 
         [HttpPost]
         public IActionResult SaveEditProfileUser(int id, [Bind("Employee")] ProfileInfoViewModel profileInfoViewModel)
@@ -186,18 +176,19 @@ namespace AbcPeople.Controllers
 
         public IActionResult ShowAddCourseView()
         {
-            var courses = new List<SelectListItem>();
-            foreach (var item in this.courseService.GetAll())
-            {
-
-            }
-            var vm = new ProfileEducationAddCourseViewModel();
-            return View("ProfileEducationAddCourse");
+            var vm = new ProfileEducationAddCourseViewModel() 
+            { 
+                Course = new Course(),
+                EmployeeCourse = new EmployeeCourse()
+            };
+            return View("ProfileEducationAddCourse", new EmployeeCourse());
         }
 
-        public IActionResult SaveEmployeeCourse()
+        public IActionResult SaveEmployeeCourse(EmployeeCourse employeeCourse)
         {
-            // save data
+            employeeCourse.EmployeeId = GetCurrentEmployee().Id;
+            this.employeeCourseService.Create(employeeCourse);
+           
             return RedirectToAction("ProfileEducations");
         }
 
@@ -243,6 +234,17 @@ namespace AbcPeople.Controllers
         public IActionResult ShowWhoIsWhoCompany()
         {
             return View("WhoIsWhoCompany");
+        }
+
+        // Helper - methods
+        private List<SelectListItem> InitializeSelectListItems(IEnumerable<ListItemBaseEntity> allEntities)
+        {
+            var SelectListItems = new List<SelectListItem>();
+            foreach (var baseEntity in allEntities)
+            {
+                SelectListItems.Add(new SelectListItem { Value = baseEntity.Id.ToString(), Text = baseEntity.Name });
+            }
+            return SelectListItems;
         }
     }
 }

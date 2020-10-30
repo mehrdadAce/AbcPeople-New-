@@ -2,9 +2,9 @@
 
 namespace AbcPeople.BDO.Entities
 {
-    public class Course : BaseEntity
+    public class Course : ListItemBaseEntity
     {
-        public string Title { get; set; }
         public string Description { get; set; }
+        public string Location { get; set; }
     }
 }

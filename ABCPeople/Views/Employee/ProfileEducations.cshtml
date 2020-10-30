@@ -107,7 +107,7 @@
                             @foreach (var employeeCourse in @Model.EmployeeCourses)
                             {
                                 <tr>
-                                    <th class="p-1 pl-1" scope="row">@employeeCourse.Course.Title</th>
+                                    <th class="p-1 pl-1" scope="row">@employeeCourse.Course.Name</th>
                                     <td class="p-1 pl-1">@employeeCourse.Timestamp.ToString("dd/MM/yyyy")</td>
                                 </tr>
                             }
